@@ -1,0 +1,77 @@
+{
+ "MRData": {
+  "xmlns": "",
+  "series": "f1",
+  "url": "https://api.jolpi.ca/ergast/f1/2024/5/laps.json",
+  "limit": "100",
+  "offset": "0",
+  "total": "6",
+  "RaceTable": {
+   "season": "2024",
+   "round": "5",
+   "Races": [
+    {
+     "season": "2024",
+     "round": "5",
+     "url": "https://en.wikipedia.org/wiki/2024_Chinese_Grand_Prix",
+     "raceName": "Chinese Grand Prix",
+     "Circuit": {
+      "circuitId": "shanghai",
+      "url": "https://en.wikipedia.org/wiki/Shanghai_International_Circuit",
+      "circuitName": "Shanghai International Circuit",
+      "Location": {
+       "lat": "31.3389",
+       "long": "121.22",
+       "locality": "Shanghai",
+       "country": "China"
+      }
+     },
+     "date": "2024-04-21",
+     "time": "07:00:00Z",
+     "Laps": [
+      {
+       "number": "1",
+       "Timings": [
+        {
+         "driverId": "max_verstappen",
+         "time": "1:41.528",
+         "position": "1"
+        },
+        {
+         "driverId": "alonso",
+         "time": "1:43.173",
+         "position": "2"
+        },
+        {
+         "driverId": "perez",
+         "time": "1:43.970",
+         "position": "3"
+        }
+       ]
+      },
+      {
+       "number": "2",
+       "Timings": [
+        {
+         "driverId": "max_verstappen",
+         "time": "1:40.103",
+         "position": "1"
+        },
+        {
+         "driverId": "alonso",
+         "time": "1:41.128",
+         "position": "2"
+        },
+        {
+         "driverId": "perez",
+         "time": "1:40.881",
+         "position": "3"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

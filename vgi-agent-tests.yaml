@@ -1,0 +1,123 @@
+# Private grader fields for the public tasks in the catalog's vgi.agent_test_tasks tag.
+# Historical tasks are pinned to finished seasons (2024) and grade by exact
+# reference comparison. Current-season tasks read live data that changes after
+# every race, so they grade with check_sql assertions plus success criteria.
+tasks:
+  - name: current_season_summary
+    check_sql: >-
+      SELECT (SELECT count(*) FROM f1.main.current_driver_standings WHERE position = 1) = 1
+         AND (SELECT count(*) FROM f1.main.current_constructor_standings WHERE position = 1) = 1
+         AND (SELECT count(*) FROM f1.main.last_race_results WHERE position = 1) = 1
+         AND (SELECT count(*) FROM f1.main.current_schedule) > 0
+    success_criteria: >-
+      Names the current drivers' and constructors' championship leaders from the current_*
+      standings tables, the winner of the latest Grand Prix from last_race_results, and the
+      rounds still to run from current_schedule.
+
+  - name: final_2024_champions
+    reference_sql: >-
+      SELECT
+        (SELECT driver_name FROM f1.main.driver_standings(2024) WHERE position = 1) AS drivers_champion,
+        (SELECT points FROM f1.main.driver_standings(2024) WHERE position = 1) AS driver_points,
+        (SELECT constructor_name FROM f1.main.constructor_standings(2024) WHERE position = 1) AS constructors_champion,
+        (SELECT points FROM f1.main.constructor_standings(2024) WHERE position = 1) AS constructor_points
+    ignore_column_names: true
+    success_criteria: >-
+      Uses driver_standings and constructor_standings for 2024: Max Verstappen (437) and McLaren (666).
+
+  - name: wins_by_driver_2024
+    reference_sql: >-
+      WITH gp AS (
+        SELECT driver_name, count(*) AS gp_wins FROM f1.main.race_results(2024)
+        WHERE position = 1 GROUP BY driver_name
+      ), sp AS (
+        SELECT driver_name, count(*) AS sprint_wins FROM f1.main.sprint_results(2024)
+        WHERE position = 1 GROUP BY driver_name
+      )
+      SELECT driver_name, coalesce(gp_wins, 0) AS gp_wins, coalesce(sprint_wins, 0) AS sprint_wins
+      FROM gp FULL OUTER JOIN sp USING (driver_name)
+      ORDER BY gp_wins DESC, sprint_wins DESC, driver_name
+    ignore_column_names: true
+    success_criteria: >-
+      Counts Grand Prix wins from race_results and sprint wins separately from sprint_results.
+
+  - name: monaco_2024_pole
+    reference_sql: >-
+      SELECT s.round, q.driver_name, q.q3
+      FROM f1.main.schedule(2024) s
+      JOIN f1.main.qualifying_results(2024) q USING (round)
+      WHERE s.circuit_id = 'monaco' AND q.position = 1
+    ignore_column_names: true
+    success_criteria: >-
+      Finds Monaco's round with schedule and reads pole from qualifying_results: Charles Leclerc, 1:10.270.
+
+  - name: china_2024_verstappen_stops
+    reference_sql: >-
+      SELECT p.stop, p.lap, p.duration_seconds,
+             (SELECT min(lap_time_seconds)
+              FROM f1.main.lap_times(2024, 5, driver_id := 'max_verstappen')) AS fastest_lap_seconds
+      FROM f1.main.pit_stops(2024, 5) p
+      WHERE p.driver_id = 'max_verstappen'
+      ORDER BY p.stop
+    ignore_column_names: true
+    success_criteria: >-
+      Uses pit_stops and lap_times for round 5 of 2024 and reports pit-lane durations, not stationary time.
+
+  - name: hamilton_wins_through_2024
+    reference_sql: >-
+      SELECT count(*) FILTER (WHERE r.position = 1) AS wins
+      FROM f1.main.driver_results('hamilton') r
+      JOIN f1.main.drivers(season := 2024) d USING (driver_id)
+      WHERE r.season <= 2024
+    ignore_column_names: true
+    success_criteria: >-
+      Finds Hamilton's driver_id and counts his Grand Prix wins through 2024 with driver_results: 105.
+
+  - name: field_size_2024
+    reference_sql: >-
+      SELECT
+        (SELECT count(*) FROM f1.main.constructors(season := 2024)) AS constructors,
+        (SELECT count(*) FROM f1.main.circuits(season := 2024)) AS circuits,
+        (SELECT count(*) FROM f1.main.seasons WHERE season <= 2024) AS seasons
+    ignore_column_names: true
+    success_criteria: >-
+      Uses constructors, circuits, and seasons: 10 constructors, 24 circuits, 75 seasons.
+
+  - name: bahrain_2024_verstappen_tyres
+    reference_sql: >-
+      SELECT st.stint_number, st.compound, st.lap_start, st.lap_end
+      FROM f1.main.session_stints(9472) st
+      JOIN f1.main.session_drivers(9472) d USING (driver_number)
+      WHERE d.name_acronym = 'VER'
+        AND 9472 = (SELECT session_key FROM f1.main.sessions(2024, session_name := 'Race')
+                    WHERE country_name = 'Bahrain')
+      ORDER BY st.stint_number
+    ignore_column_names: true
+    success_criteria: >-
+      Finds the Bahrain race session_key with sessions, maps Verstappen's car number with
+      session_drivers, and lists his three stints (soft, hard, soft) from session_stints.
+
+  - name: bahrain_2024_fastest_lap
+    reference_sql: >-
+      SELECT d.full_name, l.lap_number, l.lap_duration, r.position
+      FROM f1.main.session_laps(9472) l
+      JOIN f1.main.session_drivers(9472) d USING (driver_number)
+      JOIN f1.main.session_result(9472) r USING (driver_number)
+      WHERE l.lap_duration IS NOT NULL
+      ORDER BY l.lap_duration
+      LIMIT 1
+    ignore_column_names: true
+    success_criteria: >-
+      Uses session_laps for the fastest lap and session_result for that driver's finishing position.
+
+  - name: bahrain_2024_race_story
+    reference_sql: >-
+      SELECT
+        (SELECT meeting_official_name FROM f1.main.meetings(2024) WHERE meeting_key = 1229) AS event,
+        (SELECT count(*) FROM f1.main.race_control(9472) WHERE category = 'Flag') AS flag_messages,
+        (SELECT bool_or(rainfall) FROM f1.main.session_weather(9472)) AS any_rain,
+        (SELECT count(*) FROM f1.main.session_pits(9472)) AS pit_stops,
+        (SELECT count(*) FROM f1.main.team_radio(9472)) AS radio_clips
+    ignore_column_names: true
+    success_criteria: >-
+      Combines meetings, race_control, session_weather, session_pits, and team_radio for session 9472.

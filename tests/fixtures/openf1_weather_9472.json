@@ -1,0 +1,38 @@
+[
+ {
+  "date": "2024-03-02T14:03:56.523000+00:00",
+  "session_key": 9472,
+  "air_temperature": 18.9,
+  "pressure": 1017.1,
+  "humidity": 46.0,
+  "wind_direction": 162,
+  "meeting_key": 1229,
+  "rainfall": 0,
+  "wind_speed": 0.9,
+  "track_temperature": 26.5
+ },
+ {
+  "date": "2024-03-02T14:04:56.514000+00:00",
+  "session_key": 9472,
+  "air_temperature": 18.9,
+  "pressure": 1017.0,
+  "humidity": 46.0,
+  "wind_direction": 55,
+  "meeting_key": 1229,
+  "rainfall": 0,
+  "wind_speed": 1.0,
+  "track_temperature": 26.5
+ },
+ {
+  "date": "2024-03-02T14:05:56.523000+00:00",
+  "session_key": 9472,
+  "air_temperature": 18.9,
+  "pressure": 1017.0,
+  "humidity": 46.0,
+  "wind_direction": 55,
+  "meeting_key": 1229,
+  "rainfall": 0,
+  "wind_speed": 1.0,
+  "track_temperature": 26.5
+ }
+]

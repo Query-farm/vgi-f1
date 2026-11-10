@@ -1,0 +1,70 @@
+{
+ "MRData": {
+  "xmlns": "",
+  "series": "f1",
+  "url": "https://api.jolpi.ca/ergast/f1/current/constructorstandings.json",
+  "limit": "100",
+  "offset": "0",
+  "total": "4",
+  "StandingsTable": {
+   "season": "2026",
+   "round": "20",
+   "StandingsLists": [
+    {
+     "season": "2026",
+     "round": "20",
+     "ConstructorStandings": [
+      {
+       "position": "1",
+       "positionText": "1",
+       "points": "652",
+       "wins": "12",
+       "Constructor": {
+        "constructorId": "mercedes",
+        "url": "https://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One",
+        "name": "Mercedes",
+        "nationality": "German"
+       }
+      },
+      {
+       "position": "2",
+       "positionText": "2",
+       "points": "510",
+       "wins": "2",
+       "Constructor": {
+        "constructorId": "ferrari",
+        "url": "https://en.wikipedia.org/wiki/Scuderia_Ferrari",
+        "name": "Ferrari",
+        "nationality": "Italian"
+       }
+      },
+      {
+       "position": "3",
+       "positionText": "3",
+       "points": "415",
+       "wins": "3",
+       "Constructor": {
+        "constructorId": "red_bull",
+        "url": "https://en.wikipedia.org/wiki/Red_Bull_Racing",
+        "name": "Red Bull",
+        "nationality": "Austrian"
+       }
+      },
+      {
+       "position": "4",
+       "positionText": "4",
+       "points": "398",
+       "wins": "3",
+       "Constructor": {
+        "constructorId": "mclaren",
+        "url": "https://en.wikipedia.org/wiki/McLaren",
+        "name": "McLaren",
+        "nationality": "British"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

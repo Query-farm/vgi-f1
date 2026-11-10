@@ -1,0 +1,106 @@
+{
+ "MRData": {
+  "xmlns": "",
+  "series": "f1",
+  "url": "https://api.jolpi.ca/ergast/f1/2024/5/qualifying.json",
+  "limit": "100",
+  "offset": "0",
+  "total": "3",
+  "RaceTable": {
+   "season": "2024",
+   "round": "5",
+   "Races": [
+    {
+     "season": "2024",
+     "round": "5",
+     "url": "https://en.wikipedia.org/wiki/2024_Chinese_Grand_Prix",
+     "raceName": "Chinese Grand Prix",
+     "Circuit": {
+      "circuitId": "shanghai",
+      "url": "https://en.wikipedia.org/wiki/Shanghai_International_Circuit",
+      "circuitName": "Shanghai International Circuit",
+      "Location": {
+       "lat": "31.3389",
+       "long": "121.22",
+       "locality": "Shanghai",
+       "country": "China"
+      }
+     },
+     "date": "2024-04-21",
+     "time": "07:00:00Z",
+     "QualifyingResults": [
+      {
+       "number": "1",
+       "position": "1",
+       "Driver": {
+        "driverId": "max_verstappen",
+        "permanentNumber": "3",
+        "code": "VER",
+        "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+        "givenName": "Max",
+        "familyName": "Verstappen",
+        "dateOfBirth": "1997-09-30",
+        "nationality": "Dutch"
+       },
+       "Constructor": {
+        "constructorId": "red_bull",
+        "url": "https://en.wikipedia.org/wiki/Red_Bull_Racing",
+        "name": "Red Bull",
+        "nationality": "Austrian"
+       },
+       "Q1": "1:34.742",
+       "Q2": "1:33.794",
+       "Q3": "1:33.660"
+      },
+      {
+       "number": "11",
+       "position": "2",
+       "Driver": {
+        "driverId": "perez",
+        "permanentNumber": "11",
+        "code": "PER",
+        "url": "http://en.wikipedia.org/wiki/Sergio_P%C3%A9rez",
+        "givenName": "Sergio",
+        "familyName": "Pérez",
+        "dateOfBirth": "1990-01-26",
+        "nationality": "Mexican"
+       },
+       "Constructor": {
+        "constructorId": "red_bull",
+        "url": "https://en.wikipedia.org/wiki/Red_Bull_Racing",
+        "name": "Red Bull",
+        "nationality": "Austrian"
+       },
+       "Q1": "1:35.457",
+       "Q2": "1:34.026",
+       "Q3": "1:33.982"
+      },
+      {
+       "number": "14",
+       "position": "3",
+       "Driver": {
+        "driverId": "alonso",
+        "permanentNumber": "14",
+        "code": "ALO",
+        "url": "http://en.wikipedia.org/wiki/Fernando_Alonso",
+        "givenName": "Fernando",
+        "familyName": "Alonso",
+        "dateOfBirth": "1981-07-29",
+        "nationality": "Spanish"
+       },
+       "Constructor": {
+        "constructorId": "aston_martin",
+        "url": "https://en.wikipedia.org/wiki/Aston_Martin_in_Formula_One",
+        "name": "Aston Martin",
+        "nationality": "British"
+       },
+       "Q1": "1:35.116",
+       "Q2": "1:34.652",
+       "Q3": "1:34.148"
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

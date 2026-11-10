@@ -1,0 +1,41 @@
+[
+ {
+  "meeting_key": 1229,
+  "session_key": 9472,
+  "date": "2024-03-02T14:06:41+00:00",
+  "driver_number": null,
+  "lap_number": 1,
+  "category": "Other",
+  "flag": null,
+  "scope": null,
+  "sector": null,
+  "qualifying_phase": null,
+  "message": "PINK HEAD PADDING MATERIAL MUST BE USED"
+ },
+ {
+  "meeting_key": 1229,
+  "session_key": 9472,
+  "date": "2024-03-02T14:20:01+00:00",
+  "driver_number": null,
+  "lap_number": 1,
+  "category": "Flag",
+  "flag": "GREEN",
+  "scope": "Track",
+  "sector": null,
+  "qualifying_phase": null,
+  "message": "GREEN LIGHT - PIT EXIT OPEN"
+ },
+ {
+  "meeting_key": 1229,
+  "session_key": 9472,
+  "date": "2024-03-02T14:30:01+00:00",
+  "driver_number": null,
+  "lap_number": 1,
+  "category": "Other",
+  "flag": null,
+  "scope": null,
+  "sector": null,
+  "qualifying_phase": null,
+  "message": "PIT EXIT CLOSED"
+ }
+]

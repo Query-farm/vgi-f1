@@ -1,0 +1,62 @@
+[
+ {
+  "position": 1,
+  "driver_number": 1,
+  "number_of_laps": 17,
+  "dnf": false,
+  "dns": false,
+  "dsq": false,
+  "duration": [
+   90.031,
+   89.374,
+   89.179
+  ],
+  "gap_to_leader": [
+   0.122,
+   0.209,
+   0.0
+  ],
+  "meeting_key": 1229,
+  "session_key": 9468
+ },
+ {
+  "position": 2,
+  "driver_number": 16,
+  "number_of_laps": 19,
+  "dnf": false,
+  "dns": false,
+  "dsq": false,
+  "duration": [
+   90.243,
+   89.165,
+   89.407
+  ],
+  "gap_to_leader": [
+   0.334,
+   0.0,
+   0.228
+  ],
+  "meeting_key": 1229,
+  "session_key": 9468
+ },
+ {
+  "position": 3,
+  "driver_number": 63,
+  "number_of_laps": 17,
+  "dnf": false,
+  "dns": false,
+  "dsq": false,
+  "duration": [
+   90.35,
+   89.922,
+   89.485
+  ],
+  "gap_to_leader": [
+   0.441,
+   0.757,
+   0.306
+  ],
+  "meeting_key": 1229,
+  "session_key": 9468
+ }
+]
