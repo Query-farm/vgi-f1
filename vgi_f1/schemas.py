@@ -101,6 +101,11 @@ def session_timestamp(value: Any) -> datetime | None:
     return to_timestamp(f"{day}T{clock}")
 
 
+def to_text(value: Any) -> str | None:
+    """Pass through non-blank strings; Jolpica publishes some missing times as ``""``."""
+    return value if isinstance(value, str) and value.strip() else None
+
+
 def to_bool(value: Any) -> bool | None:
     """Pass through JSON booleans only."""
     return value if isinstance(value, bool) else None
@@ -463,9 +468,17 @@ RESULTS_SCHEMA = pa.schema(
         field("laps", pa.int32(), "Number of laps completed."),
         field("status", pa.string(), "Finishing status, for example Finished, +1 Lap, or Engine."),
         field(
-            "race_time_millis", pa.int64(), "Total race time in milliseconds for finishers on the lead lap."
+            "race_time_millis",
+            pa.int64(),
+            "Elapsed race time in milliseconds as published; usually null for lapped or retired cars, "
+            "but the archive also records it for some of them.",
         ),
-        field("race_time", pa.string(), "Published race time: absolute for the winner, a gap for others."),
+        field(
+            "race_time",
+            pa.string(),
+            "Published race time: absolute for the winner, a gap such as +5.123 for others; null when "
+            "none is published.",
+        ),
         field(
             "fastest_lap_rank",
             pa.int32(),
@@ -474,7 +487,12 @@ RESULTS_SCHEMA = pa.schema(
         field("fastest_lap_number", pa.int32(), "Lap number on which the driver set their fastest lap."),
         field("fastest_lap_time", pa.string(), "Fastest lap time as published, for example 1:32.608."),
         field("fastest_lap_seconds", SECONDS, "Fastest lap time in seconds as an exact decimal."),
-        field("fastest_lap_avg_speed_kph", pa.float64(), "Average speed of the fastest lap in km/h."),
+        field(
+            "fastest_lap_avg_speed_kph",
+            pa.float64(),
+            "Average speed of the fastest lap in km/h; null where the archive does not publish it "
+            "(sprints and races from 2025 onwards).",
+        ),
     ]
 )
 
@@ -488,7 +506,7 @@ def flatten_results(races: Iterable[Mapping[str, Any]], *, key: str = "Results")
             if not isinstance(entry, Mapping):
                 continue
             fastest = _mapping(entry.get("FastestLap"))
-            fastest_time = _mapping(fastest.get("Time")).get("time")
+            fastest_time = to_text(_mapping(fastest.get("Time")).get("time"))
             race_time = _mapping(entry.get("Time"))
             position_text = entry.get("positionText")
             rows.append(
@@ -505,7 +523,7 @@ def flatten_results(races: Iterable[Mapping[str, Any]], *, key: str = "Results")
                     "laps": to_int(entry.get("laps")),
                     "status": entry.get("status"),
                     "race_time_millis": to_int(race_time.get("millis")),
-                    "race_time": race_time.get("time"),
+                    "race_time": to_text(race_time.get("time")),
                     "fastest_lap_rank": to_int(fastest.get("rank")),
                     "fastest_lap_number": to_int(fastest.get("lap")),
                     "fastest_lap_time": fastest_time,

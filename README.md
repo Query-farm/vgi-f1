@@ -326,9 +326,11 @@ description pages, and includes a health check.
   is honored with a 30-second cap. Redirects are followed.
 - **Timeouts.** Each request has a 30-second timeout (10 seconds to connect) and
   each logical fetch a 120-second deadline across all pages and retries.
-- **Pagination.** Jolpica-F1 pages at 100 rows; every page is fetched (up to
-  30) and races split across pages are rejoined, so results are never silently
-  truncated.
+- **Pagination.** Jolpica-F1 pages at 100 rows. Table functions stream one
+  Arrow batch per upstream page (up to 30), carrying the offset in serializable
+  scan state, so the first rows arrive after one request and results are never
+  silently truncated. A race whose rows continue onto the next page simply
+  continues in the next batch.
 - **Empty results.** OpenF1 answers 404 when a filter matches nothing; that is
   returned as zero rows. OpenF1's 422 "too much data" is reported as an error.
 

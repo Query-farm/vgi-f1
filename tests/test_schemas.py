@@ -166,6 +166,28 @@ def test_retirement_is_not_classified() -> None:
     assert row["classified"] is False
 
 
+def test_blank_published_times_are_null() -> None:
+    # Jolpica publishes {"millis": "...", "time": ""} for some retirements (2024 round 3, Russell).
+    race = {
+        "season": "2024",
+        "round": "3",
+        "Results": [
+            {
+                "position": "17",
+                "positionText": "R",
+                "status": "Retired",
+                "Time": {"millis": "4684734", "time": ""},
+                "FastestLap": {"rank": "5", "lap": "50", "Time": {"time": ""}},
+            }
+        ],
+    }
+    [row] = schemas.flatten_results([race])
+    assert row["race_time"] is None
+    assert row["race_time_millis"] == 4_684_734
+    assert row["fastest_lap_time"] is None
+    assert row["fastest_lap_seconds"] is None
+
+
 def test_sprint_results() -> None:
     rows = schemas.flatten_sprint_results(_items("jolpica_2024_sprint.json", "RaceTable", "Races"))
     assert rows[0]["round"] == 5
