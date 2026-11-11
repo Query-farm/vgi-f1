@@ -35,18 +35,18 @@ It requires no credentials and does not rehost or persist either dataset.
 
 ## Quick start
 
-Install the released worker with `uv`:
+The worker is not published to PyPI. `uvx` runs the tagged release straight from
+GitHub and caches it after the first use:
 
 ```bash
-uv tool install vgi-f1
-vgi-f1
+uvx --from git+https://github.com/Query-farm/vgi-f1@v0.1.0 vgi-f1 --help
 ```
 
 Launch Haybarn with the catalog pre-attached:
 
 ```bash
 uvx haybarn-cli \
-  -cmd "INSTALL vgi FROM community; LOAD vgi; ATTACH 'f1' (TYPE vgi, LOCATION 'vgi-f1');" \
+  -cmd "INSTALL vgi FROM community; LOAD vgi; ATTACH 'f1' (TYPE vgi, LOCATION 'uvx --from git+https://github.com/Query-farm/vgi-f1@v0.1.0 vgi-f1');" \
   :memory:
 ```
 
@@ -57,7 +57,7 @@ INSTALL vgi FROM community;
 LOAD vgi;
 ATTACH 'f1' (
   TYPE vgi,
-  LOCATION 'vgi-f1'
+  LOCATION 'uvx --from git+https://github.com/Query-farm/vgi-f1@v0.1.0 vgi-f1'
 );
 ```
 
@@ -273,7 +273,7 @@ or an explicit anonymous-access decision:
 export VGI_SIGNING_KEY='a-long-random-secret-shared-by-every-replica'
 export VGI_BEARER_TOKENS='replace-with-a-random-token=haybarn'
 
-vgi-f1-http \
+uvx --from git+https://github.com/Query-farm/vgi-f1@v0.1.0 vgi-f1-http \
   --host 0.0.0.0 \
   --port 8000 \
   --cors-origins 'https://sql.example.com' \
@@ -358,9 +358,12 @@ local HTTP server. Live upstream smoke tests are opt-in with
 `uv run pytest -m live` and run, with the executing `vgi-lint` pass over every
 catalog example, in a serialized scheduled workflow.
 
-Publishing is release-driven: create a GitHub release named `vX.Y.Z` matching
-the version in `pyproject.toml`. CI builds, attests, validates, and publishes
-the distributions through PyPI trusted publishing.
+Publishing is driven by releases. Create a GitHub release named `vX.Y.Z` that
+matches the version in `pyproject.toml`. CI then builds, validates and attests
+the wheel and sdist, attaches them to the release, and publishes a
+multi-platform container image to `ghcr.io/query-farm/vgi-f1`. The package is
+not published to PyPI; install it from the release tag as shown in the quick
+start.
 
 ## License
 
