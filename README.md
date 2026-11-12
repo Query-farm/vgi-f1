@@ -39,14 +39,14 @@ The worker is not published to PyPI. `uvx` runs the tagged release straight from
 GitHub and caches it after the first use:
 
 ```bash
-uvx --from git+https://github.com/Query-farm/vgi-f1@v0.1.0 vgi-f1 --help
+uvx --from git+https://github.com/Query-farm/vgi-f1@v0.2.0 vgi-f1 --help
 ```
 
 Launch Haybarn with the catalog pre-attached:
 
 ```bash
 uvx haybarn-cli \
-  -cmd "INSTALL vgi FROM community; LOAD vgi; ATTACH 'f1' (TYPE vgi, LOCATION 'uvx --from git+https://github.com/Query-farm/vgi-f1@v0.1.0 vgi-f1');" \
+  -cmd "INSTALL vgi FROM community; LOAD vgi; ATTACH 'f1' (TYPE vgi, LOCATION 'uvx --from git+https://github.com/Query-farm/vgi-f1@v0.2.0 vgi-f1');" \
   :memory:
 ```
 
@@ -57,7 +57,7 @@ INSTALL vgi FROM community;
 LOAD vgi;
 ATTACH 'f1' (
   TYPE vgi,
-  LOCATION 'uvx --from git+https://github.com/Query-farm/vgi-f1@v0.1.0 vgi-f1'
+  LOCATION 'uvx --from git+https://github.com/Query-farm/vgi-f1@v0.2.0 vgi-f1'
 );
 ```
 
@@ -273,7 +273,7 @@ or an explicit anonymous-access decision:
 export VGI_SIGNING_KEY='a-long-random-secret-shared-by-every-replica'
 export VGI_BEARER_TOKENS='replace-with-a-random-token=haybarn'
 
-uvx --from git+https://github.com/Query-farm/vgi-f1@v0.1.0 vgi-f1-http \
+uvx --from git+https://github.com/Query-farm/vgi-f1@v0.2.0 vgi-f1-http \
   --host 0.0.0.0 \
   --port 8000 \
   --cors-origins 'https://sql.example.com' \
