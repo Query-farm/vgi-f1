@@ -1,0 +1,29 @@
+{
+  "source": "Jolpica-F1",
+  "license": "CC BY-NC-SA 4.0",
+  "modifications": "None; complete JSON response bodies retained",
+  "entries": [
+    {
+      "filename": "laps.json",
+      "path": "2024/5/drivers/max_verstappen/laps.json",
+      "url": "https://api.jolpi.ca/ergast/f1/2024/5/drivers/max_verstappen/laps.json?limit=100&offset=0",
+      "retrieval_start_utc": "2026-11-14T06:39:00.960851+00:00",
+      "retrieval_end_utc": "2026-11-14T06:39:01.572034+00:00",
+      "status": 200,
+      "sha256": "2d62552518f9865f157ab583fdf339d8589b91f0c1a9a7b263865017764c0edf",
+      "reported_total": 56,
+      "bytes": 5731
+    },
+    {
+      "filename": "pitstops.json",
+      "path": "2024/5/pitstops.json",
+      "url": "https://api.jolpi.ca/ergast/f1/2024/5/pitstops.json?limit=100&offset=0",
+      "retrieval_start_utc": "2026-11-14T06:39:01.572336+00:00",
+      "retrieval_end_utc": "2026-11-14T06:39:02.076218+00:00",
+      "status": 200,
+      "sha256": "92b09337d20cb327a201a3a565b0c06f3be2621ad291272b8f7f0e0fa9cc7fc1",
+      "reported_total": 40,
+      "bytes": 3917
+    }
+  ]
+}

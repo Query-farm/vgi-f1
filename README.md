@@ -390,3 +390,7 @@ Copyright 2026 Query Farm LLC - https://query.farm
 The worker's source code is released under the [MIT License](LICENSE). Data
 returned by the worker remains subject to the upstream CC BY-NC-SA 4.0 licence
 described above.
+
+## Notebooks
+
+[Executed lap-filter walkthrough](notebooks/README.md) uses complete recorded Jolpica responses, a separate filter experiment and a tested live mode.
