@@ -10,6 +10,7 @@ import pyarrow as pa
 from vgi.arguments import Arg
 
 from vgi_f1 import api
+from vgi_f1.examples import TYRE_STRATEGY_BY_FINISH
 from vgi_f1.functions import Example, Fetched, table_function
 from vgi_f1.schemas import (
     MEETINGS_SCHEMA,
@@ -288,7 +289,8 @@ SessionStintsFunction = table_function(
             "Compound usage in the 2024 Bahrain Grand Prix.",
             "SELECT compound, count(*) AS stints, sum(lap_end - lap_start + 1) AS laps "
             "FROM f1.main.session_stints(9472) GROUP BY compound ORDER BY laps DESC",
-        )
+        ),
+        TYRE_STRATEGY_BY_FINISH,
     ],
     estimate=60,
     maximum=200,

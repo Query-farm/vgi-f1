@@ -144,7 +144,8 @@ ORDER BY wins DESC;
 
 SELECT round, race_name, driver_name
 FROM f1.main.sprint_results(2024)
-WHERE position = 1;
+WHERE position = 1
+ORDER BY round;
 
 -- Pole positions with exact Q3 seconds
 SELECT round, race_name, driver_name, q3, q3_seconds
@@ -175,6 +176,23 @@ SELECT driver_id, stop, lap, duration_seconds
 FROM f1.main.pit_stops(2024, 5)
 ORDER BY duration_seconds
 LIMIT 5;
+
+-- Combine them: Verstappen's pace on each stint, splitting laps at his pit
+-- stops and leaving out in- and out-laps
+WITH stops AS (
+  SELECT lap FROM f1.main.pit_stops(2024, 5) WHERE driver_id = 'max_verstappen'
+), laps AS (
+  SELECT l.lap, l.lap_time_seconds,
+         1 + (SELECT count(*) FROM stops WHERE stops.lap < l.lap) AS stint
+  FROM f1.main.lap_times(2024, 5, driver_id := 'max_verstappen') l
+)
+SELECT stint, min(lap) AS first_lap, max(lap) AS last_lap,
+       min(lap_time_seconds) AS best_lap_seconds,
+       median(lap_time_seconds) AS median_lap_seconds
+FROM laps
+WHERE lap NOT IN (SELECT lap FROM stops) AND lap NOT IN (SELECT lap + 1 FROM stops)
+GROUP BY stint
+ORDER BY stint;
 ```
 
 Pass `driver_id` to `lap_times()` whenever you can: a full race is about 1,100

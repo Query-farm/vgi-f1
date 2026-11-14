@@ -19,6 +19,8 @@ from vgi_f1.ergast import (
     LastRaceResultsFunction,
     SeasonsFunction,
 )
+from vgi_f1.examples import COMPOSED_EXAMPLES, SPRINT_VS_GRAND_PRIX_WINNERS, STANDINGS_WITH_LAST_RACE
+from vgi_f1.functions import Example
 from vgi_f1.meta import column_comments
 from vgi_f1.openf1 import FUNCTIONS as OPENF1_FUNCTIONS
 from vgi_f1.schemas import (
@@ -32,8 +34,24 @@ from vgi_f1.schemas import (
 SOURCE_URL = "https://github.com/Query-farm/vgi-f1"
 
 
-def _examples(*pairs: tuple[str, str]) -> str:
+def _examples(*examples: tuple[str, str] | Example) -> str:
+    pairs = [(e.description, e.sql) if isinstance(e, Example) else e for e in examples]
     return json.dumps([{"description": description, "sql": sql} for description, sql in pairs])
+
+
+_DRIVER_STANDINGS_EXAMPLES: tuple[tuple[str, str] | Example, ...] = (
+    (
+        "The current championship top ten.",
+        "SELECT position, driver_name, constructor_name, points, wins "
+        "FROM f1.main.current_driver_standings ORDER BY position LIMIT 10",
+    ),
+    (
+        "Points gap from each driver to the leader.",
+        "SELECT driver_name, points, max(points) OVER () - points AS gap_to_leader "
+        "FROM f1.main.current_driver_standings ORDER BY position",
+    ),
+    STANDINGS_WITH_LAST_RACE,
+)
 
 
 _DRIVER_STANDINGS_TAGS = {
@@ -50,18 +68,7 @@ _DRIVER_STANDINGS_TAGS = {
         "The current Formula 1 drivers' championship as an ordinary read-only table, refreshed "
         "from Jolpica-F1 at most every ten minutes. Points are exact decimals."
     ),
-    "vgi.example_queries": _examples(
-        (
-            "The current championship top ten.",
-            "SELECT position, driver_name, constructor_name, points, wins "
-            "FROM f1.main.current_driver_standings ORDER BY position LIMIT 10",
-        ),
-        (
-            "Points gap from each driver to the leader.",
-            "SELECT driver_name, points, max(points) OVER () - points AS gap_to_leader "
-            "FROM f1.main.current_driver_standings ORDER BY position",
-        ),
-    ),
+    "vgi.example_queries": _examples(*_DRIVER_STANDINGS_EXAMPLES),
 }
 
 _CONSTRUCTOR_STANDINGS_TAGS = {
@@ -175,6 +182,15 @@ _EXECUTABLE_EXAMPLES = json.dumps(
             ),
             "expected_result": [{"wins": 19}],
         },
+        {
+            "name": "one_sprint_and_grand_prix_double_2024",
+            "description": "Only one 2024 sprint weekend (China) had the same sprint and Grand Prix winner.",
+            "sql": (
+                "SELECT count(*) FILTER (WHERE won_both) AS doubles, count(*) AS sprint_weekends "
+                f"FROM ({SPRINT_VS_GRAND_PRIX_WINNERS.sql})"
+            ),
+            "expected_result": [{"doubles": 1, "sprint_weekends": 6}],
+        },
     ]
 )
 
@@ -245,6 +261,22 @@ _AGENT_TEST_TASKS = json.dumps(
                 "For the 2024 Bahrain Grand Prix race, give the official event name, the number of "
                 "flag messages from race control, whether it rained, the number of pit stops, and "
                 "the number of team radio clips."
+            ),
+        },
+        {
+            "name": "china_2024_podium_pit_stops",
+            "prompt": (
+                "For the 2024 Chinese Grand Prix (round 5), list the three podium finishers in "
+                "finishing order with their finishing position, driver name, number of pit stops, "
+                "and total pit-lane time in seconds."
+            ),
+        },
+        {
+            "name": "bahrain_2024_least_pit_lane_time_team",
+            "prompt": (
+                "In the 2024 Bahrain Grand Prix race, which team spent the least combined time in "
+                "the pit lane across both of its cars? Return one row: the team name, the team's "
+                "total number of pit stops, and the best finishing position of its drivers."
             ),
         },
     ]
@@ -401,7 +433,10 @@ F1_CATALOG = Catalog(
                     "functions take `season` (and optionally `round`); OpenF1 session functions "
                     "take a `session_key` found with `sessions()`."
                 ),
-                "vgi.example_queries": _DRIVER_STANDINGS_TAGS["vgi.example_queries"],
+                "vgi.example_queries": _examples(
+                    *(e for e in _DRIVER_STANDINGS_EXAMPLES if e not in COMPOSED_EXAMPLES),
+                    *COMPOSED_EXAMPLES,
+                ),
             },
             functions=[*ERGAST_FUNCTIONS, *OPENF1_FUNCTIONS],
             tables=[

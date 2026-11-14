@@ -101,7 +101,7 @@ def test_catalog_discovery_contract_is_public_and_machine_readable() -> None:
 
     assert examples
     assert all({"name", "description", "sql", "expected_result"} <= example.keys() for example in examples)
-    assert 6 <= len(tasks) <= 10
+    assert 6 <= len(tasks) <= 12
     assert all(set(task) == {"name", "prompt"} for task in tasks)
     assert len({task["name"] for task in tasks}) == len(tasks)
 

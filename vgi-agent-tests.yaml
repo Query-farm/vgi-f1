@@ -121,3 +121,30 @@ tasks:
     ignore_column_names: true
     success_criteria: >-
       Combines meetings, race_control, session_weather, session_pits, and team_radio for session 9472.
+
+  - name: china_2024_podium_pit_stops
+    reference_sql: >-
+      SELECT r.position, r.driver_name, count(p.stop) AS stops, sum(p.duration_seconds) AS pit_lane_seconds
+      FROM f1.main.race_results(2024, round := 5) r
+      LEFT JOIN f1.main.pit_stops(2024, 5) p USING (driver_id)
+      WHERE r.position <= 3
+      GROUP BY r.position, r.driver_name
+      ORDER BY r.position
+    ignore_column_names: true
+    success_criteria: >-
+      Joins race_results and pit_stops for 2024 round 5 on driver_id: Verstappen 2 stops (44.726 s),
+      Norris 1 stop (22.161 s), Pérez 2 stops (44.398 s).
+
+  - name: bahrain_2024_least_pit_lane_time_team
+    reference_sql: >-
+      SELECT d.team_name, count(*) AS pit_stops, min(r.position) AS best_finish
+      FROM f1.main.session_pits(9472) p
+      JOIN f1.main.session_drivers(9472) d USING (driver_number)
+      JOIN f1.main.session_result(9472) r USING (driver_number)
+      GROUP BY d.team_name
+      ORDER BY sum(p.lane_duration)
+      LIMIT 1
+    ignore_column_names: true
+    success_criteria: >-
+      Sums session_pits lane_duration per team via session_drivers and takes the best finish from
+      session_result: Ferrari, 4 stops, best finish 3rd (about 96.3 s against Red Bull's 98.2 s).

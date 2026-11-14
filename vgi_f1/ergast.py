@@ -10,6 +10,7 @@ import pyarrow as pa
 from vgi.arguments import Arg
 
 from vgi_f1 import api
+from vgi_f1.examples import SPRINT_VS_GRAND_PRIX_WINNERS, STINT_PACE
 from vgi_f1.functions import Example, Paged, table_function
 from vgi_f1.schemas import (
     CIRCUITS_SCHEMA,
@@ -411,7 +412,8 @@ SprintResultsFunction = table_function(
             "Sprint winners in 2024.",
             "SELECT round, race_name, driver_name FROM f1.main.sprint_results(2024) "
             "WHERE position = 1 ORDER BY round",
-        )
+        ),
+        SPRINT_VS_GRAND_PRIX_WINNERS,
     ],
     estimate=120,
     maximum=200,
@@ -475,7 +477,8 @@ LapTimesFunction = table_function(
             "Max Verstappen's laps in the 2024 Chinese Grand Prix.",
             "SELECT lap, position, lap_time FROM f1.main.lap_times(2024, 5, driver_id := 'max_verstappen') "
             "ORDER BY lap",
-        )
+        ),
+        STINT_PACE,
     ],
     estimate=1_100,
     maximum=2_000,
