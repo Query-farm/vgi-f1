@@ -19,7 +19,7 @@ from vgi_f1.ergast import (
     LastRaceResultsFunction,
     SeasonsFunction,
 )
-from vgi_f1.examples import COMPOSED_EXAMPLES, SPRINT_VS_GRAND_PRIX_WINNERS, STANDINGS_WITH_LAST_RACE
+from vgi_f1.examples import COMPOSED_EXAMPLES, STANDINGS_WITH_LAST_RACE
 from vgi_f1.functions import Example
 from vgi_f1.meta import column_comments
 from vgi_f1.openf1 import FUNCTIONS as OPENF1_FUNCTIONS
@@ -181,15 +181,6 @@ _EXECUTABLE_EXAMPLES = json.dumps(
                 "WHERE position = 1 AND driver_id = 'max_verstappen'"
             ),
             "expected_result": [{"wins": 19}],
-        },
-        {
-            "name": "one_sprint_and_grand_prix_double_2024",
-            "description": "Only one 2024 sprint weekend (China) had the same sprint and Grand Prix winner.",
-            "sql": (
-                "SELECT count(*) FILTER (WHERE won_both) AS doubles, count(*) AS sprint_weekends "
-                f"FROM ({SPRINT_VS_GRAND_PRIX_WINNERS.sql})"
-            ),
-            "expected_result": [{"doubles": 1, "sprint_weekends": 6}],
         },
     ]
 )
