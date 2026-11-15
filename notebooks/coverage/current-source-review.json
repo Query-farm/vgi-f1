@@ -1,0 +1,19 @@
+{
+  "release_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+  "current_revision": "a4470419e4cb3c5c1b521b47bd6ad76680da44f6",
+  "reviewed_at": "2026-11-15T00:49:33.562635+00:00",
+  "reviewer": "Codex /root",
+  "registration": "F1_CATALOG has sole main schema, all ERGAST_FUNCTIONS and OPENF1_FUNCTIONS (27 names), plus five differently named relation surfaces. Their backing all_* functions remain separate logical objects. No views, writes or COPY. Full catalog includes team_radio and race_control, no source-based denominator exclusions. Historical demonstrated endpoints are public.",
+  "compatibility": "Full source/dependency delta changes example SQL, agent tasks and metadata generation only. Registration, function signatures, handlers, schemas and dependency declarations unchanged. Current interface compatibility reviewed separately; exact runtime evidence belongs to v0.2.0.",
+  "source_sha256": {
+    "vgi_f1/__init__.py": "5d1939dd46aee83c6e375b480d9e8b45ef896eb6fa3e2fd21f06cc93b58ea249",
+    "vgi_f1/api.py": "1d75f4013a7f710022d1c7249f933e5a2489a0a86c015a986ab16a95bfb68ab1",
+    "vgi_f1/ergast.py": "20a09818508e4df19db91072f654cd1c96c784888ad09c637706faba144af435",
+    "vgi_f1/examples.py": "637d08b195efc9b893e4959b06508f19c0426874a7d84cfca403c282ed0d098d",
+    "vgi_f1/functions.py": "ea09f77fd84b4d4eee3c2cd82e3126a09167d5bee8b5636ce054bc2569173bf8",
+    "vgi_f1/meta.py": "041dea9254e9365ba700c52bf7d63ec0a52545a5059ee87164ee45ce04586ef1",
+    "vgi_f1/openf1.py": "c91ba7fd3c78d61964d022f0a3965da25b88ad671cf85c2a40fd78000af9ee85",
+    "vgi_f1/schemas.py": "e3713d1512746fba332800405aa94016996f97a5be03c977b4d6a7a3d096d333",
+    "vgi_f1/worker.py": "23af2a7fecdca24cfdca3e828a3654e429acc8ab5f6a01d7e47bd01cceedb6fd"
+  }
+}

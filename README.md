@@ -393,4 +393,4 @@ described above.
 
 ## Notebooks
 
-[Executed lap-filter walkthrough](notebooks/README.md) uses complete recorded Jolpica responses, a separate filter experiment and a tested live mode.
+[Three executed SQL notebooks](notebooks/README.md) explore pit-lap filters, separate weekend classifications and weather/lap time alignment through the released worker. They include complete public recordings, meaningful experiments, SVG charts and Open in Colab links.

@@ -1,46 +1,60 @@
-# Formula 1 notebooks
+# Formula 1 Data notebooks
 
-[01 · How much does a pit-adjacent lap filter change a stint summary?](01_pit_lap_filters_change_stint_summaries.ipynb) inspects Max Verstappen's 2024 Chinese Grand Prix laps, groups them at recorded stops, and compares retained lap-time distributions. The experiment disables only the pit-adjacent exclusion.
+Three executed SQL stories use the released [Formula 1 Data worker](https://github.com/Query-farm/vgi-f1). Each notebook has an **Open in Colab** link, visible VGI connection SQL, an editable experiment and SVG charts.
+
+| Notebook | Question | Experiment |
+| --- | --- | --- |
+| [Pit-adjacent lap filters](01_pit_lap_filters_change_stint_summaries.ipynb) | Which laps define a stint summary? Preserve the original 2024 Chinese GP analysis. | Include the four previously excluded laps. |
+| [Separate weekend classifications](02_a_weekend_has_separate_classifications.ipynb) | How do qualifying, starting grid, race results and sprint points differ? | Remove sprint points from the local weekend total. |
+| [Weather and lap clocks](03_weather_context_needs_a_time_tolerance.ipynb) | How fresh must a preceding weather reading be? Resolve the 2024 Bahrain race, driver, stints and pit context first. | Reduce the allowed weather age from 60 to 15 seconds. |
 
 ## Run
 
-Requirements: [uv](https://docs.astral.sh/uv/), Git, Python 3.13+ (uv can install it), and internet access for package/Git downloads. Default replay needs no API credentials or surrounding worker checkout. Live mode additionally needs Jolpica-F1 access.
+Colab opens the notebook directly; run its short bootstrap and then all cells. It installs the shared **base** package and retrieves checksum-verified companion files. Compatible preloaded plotting, pandas and kernel libraries are retained. Restart the kernel before changing source mode. GitHub shows setup cells expanded; folding metadata only assists editors.
+
+For local publication, install [uv](https://docs.astral.sh/uv/) and Git, then:
 
 ```sh
 cd notebooks
-uv sync --locked
-uv run --locked python execute.py --timeout 300
+uv run --locked vgi-notebooks --timeout 300
 ```
 
-The locked notebook environment uses Haybarn 2.0.0rc11. Visible SQL uses the literal command `uvx --from git+https://github.com/Query-farm/vgi-f1@v0.2.0 --with vgi-python==0.51.0 --with vgi-rpc==0.53.1 --with httpx==0.28.1 --with pyarrow==25.0.1 vgi-f1`. The published Git tag resolves to `dae778b4965cc878ff00315834976d6c66d2bdff`; the worker is not on PyPI. uv installs this source in its cache. Upgrade the release and compatible dependency pins deliberately, then rerun replay, experiment and live checks.
+The local lock uses the shared package's `[runner]` extra; Colab never installs that extra. The visible worker command is:
 
-Optional editor kernel:
+```sql
+ATTACH 'f1' (
+    TYPE vgi,
+    LOCATION 'uvx --python 3.13 --from git+https://github.com/Query-farm/vgi-f1@v0.2.0 vgi-f1'
+);
+```
+
+The published v0.2.0 tag resolves to `dae778b4965cc878ff00315834976d6c66d2bdff`. Its isolated environment owns the worker's dependency ranges; the notebook does not override transitive dependencies. First execution needs internet access to obtain public packages, release source and companions. There is no worker compilation or manual source checkout step.
+
+Experiments must use a separate destination, preserving the saved defaults:
 
 ```sh
-uv run --locked python -m ipykernel install --user --name vgi-f1-notebooks --display-name "Python (vgi-f1 notebooks)"
+uv run --locked vgi-notebooks 01_pit_lap_filters_change_stint_summaries.ipynb --parameters '{"EXCLUDE_PIT_ADJACENT":false}' --output-dir artifacts/all-laps
+uv run --locked vgi-notebooks 02_a_weekend_has_separate_classifications.ipynb --parameters '{"INCLUDE_SPRINT":false}' --output-dir artifacts/without-sprint
+uv run --locked vgi-notebooks 03_weather_context_needs_a_time_tolerance.ipynb --parameters '{"MAX_WEATHER_AGE_SECONDS":15}' --output-dir artifacts/fresher-weather
+uv run --locked vgi-notebooks --parameters '{"DATA_MODE":"live"}' --output-dir artifacts/live
 ```
 
-Use this directory as working directory, then Restart Kernel → Run All. The runner registers a temporary kernel automatically and replaces saved output only on complete success.
+Live mode queries the same finished events through official public endpoints. It never falls back to recordings. Historical corrections and service availability can change a live run. The default is reproducible replay through the real released worker.
 
-## Separate experiment and live check
+## Source provenance and interpretation
 
-```sh
-uv run --locked python execute.py --parameters '{"EXCLUDE_PIT_ADJACENT":false}' --output-dir artifacts/all-laps
-uv run --locked python execute.py --parameters '{"DATA_MODE":"live"}' --output-dir artifacts/live
-```
+The first story retains its two original, complete Jolpica-F1 responses from November 14, 2026: 56 Max Verstappen laps and 40 field pit stops for the 2024 Chinese GP. Original bytes and [manifest](fixtures/manifest.json) are unchanged. Stop laps belong to the preceding group; excluding a stop lap and its following lap affects only summaries. Quartiles describe retained observations, not uncertainty or equal-condition pace. These groups alone do not identify tyre compound or age.
 
-The experiment keeps replay and changes only the filter. Restore `True` afterward. Live is a separate source check for the same finished race, not a switch to the current season. Overrides require a separate destination; branding, recorded responses, replay helper, docs and locked environment accompany the executed copy. Logs, charts, experiments and virtual environments are ignored.
+The second story uses seven complete official Jolpica-F1 responses acquired November 15, 2026 UTC, with 20 race entries, a 25-driver season reference, ten constructors and event/circuit context. Grand Prix points sum to 102 and sprint points to 36. The two events remain separate source columns when the experiment changes the selected total from 138 to 102. Grid-to-finish position changes are not an observed overtaking count.
 
-## Provenance and data license
+The third story uses eight complete official OpenF1 responses acquired November 15, 2026 UTC. Meeting and session keys distinguish the Bahrain Grand Prix from pre-season testing. Hamilton's 57 laps join three published stint intervals; the two pit records supply lane durations but no stationary stop duration. A backwards ASOF join preserves every lap and never borrows future weather. Missing or stale temperatures are not zero, and an age limit does not identify causes of lap-time changes.
 
-Source: [Jolpica-F1](https://github.com/jolpica/jolpica-f1), Ergast-compatible API. Two complete responses were recorded on November 14, 2026: 56 driver lap timings and 40 field pit stops for season 2024/round 5. Exact capture UTC bounds, URLs, reported totals, bytes and hashes are in [fixtures/manifest.json](fixtures/manifest.json); original response bodies are unchanged. These are independent complete recordings, not the repository's trimmed test fixtures. See [fixture attribution](fixtures/README.md).
+The compressed JSON packs under `recordings/` contain complete original response bytes as base64, request URLs, exact query parameters, status codes, capture bounds and SHA-256 hashes. The helper checks these bytes, serves only exact loopback requests and audits each requested population (2, 7 or 8 calls). Source capture time and this notebook's retrieval time are separate; multi-request data is not an atomic snapshot. No synthetic race records are used.
 
-Data and derived notebook data outputs retain [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) attribution to Jolpica-F1 under its [published terms](https://github.com/jolpica/jolpica-f1/blob/main/TERMS.md). The worker and helper code retain MIT licensing. This project is not affiliated with Formula 1, the Formula One group or the FIA.
+[Jolpica-F1](https://github.com/jolpica/jolpica-f1) data and derived outputs retain [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) attribution under its [terms](https://github.com/jolpica/jolpica-f1/blob/main/TERMS.md). [OpenF1](https://openf1.org/) historical responses retain provider attribution; source data rights remain with their providers. Worker/helper code retains its repository license. No affiliation with Formula 1, the Formula One group or the FIA is implied.
 
-The replay helper hash-checks and serves only the exact recorded paths at offset 0/limit 100. It binds a local ephemeral port; unsupported requests fail. The unchanged VGI worker still performs HTTP retrieval and parsing. Live explicitly selects official endpoints and never falls back to replay or synthetic values. Capture times, this run's retrieval bounds and a materialized-data fingerprint are displayed separately. Historical corrections can change a live run.
+## Coverage and shared tools
 
-## Interpretation
+[coverage.json](coverage.json) maps successful visible SQL to **17 of 32 logical public surfaces**, above the 16-object threshold. Both the release and current source catalogs are complete; differently named backing scans and relations remain separate objects. Current source differs in examples and metadata only. Current-interface compatibility is reviewed, while exact execution belongs to the released worker; no current-main runtime execution is claimed.
 
-The lap request supplies the driver as an API argument; pit stops are bounded to one race and filtered locally. Each is materialized once. Stint number is one plus the number of stops on earlier laps: the stop lap belongs to the preceding group. These groups do not identify tyre compound/age. Pit-adjacent exclusion removes the stop lap and its following lap from summaries while retaining them in the raw chart.
-
-Lap and pit-lane durations are seconds. Pit-lane time includes entry to exit, not merely stationary service; its separate wall-clock string is not assumed UTC. Quartiles describe the retained distribution, not uncertainty in an estimated pace. Starting-lap, traffic, safety-car, flag, weather and fuel effects remain. These observations do not establish equal-condition racing pace or causal tyre/driver differences.
+The [central notebook standard](https://github.com/Query-farm/vgi-example-notebooks/blob/main/docs/standard.md), runner, branding, setup and chart presentation live in [vgi-example-notebooks](https://github.com/Query-farm/vgi-example-notebooks). Domain replay/data companions stay here. Saved charts contain native SVG and content-addressed GitHub image references. Tests cover defaults, separate experiments, public live reads and one fresh notebook-only run with existing libraries preloaded; local compatibility testing is not a hosted Colab UI execution.

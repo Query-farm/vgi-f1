@@ -1,0 +1,1114 @@
+{
+  "query": "SELECT * FROM duckdb_functions() WHERE database_name='f1' ORDER BY schema_name,function_name",
+  "columns": [
+    "database_name",
+    "database_oid",
+    "schema_name",
+    "function_name",
+    "alias_of",
+    "function_type",
+    "description",
+    "comment",
+    "tags",
+    "return_type",
+    "parameters",
+    "parameter_types",
+    "varargs",
+    "macro_definition",
+    "has_side_effects",
+    "internal",
+    "extension_name",
+    "function_oid",
+    "examples",
+    "stability",
+    "categories"
+  ],
+  "rows": [
+    [
+      "f1",
+      "22595",
+      "main",
+      "all_current_constructor_standings",
+      null,
+      "table",
+      "Current F1 constructors' championship standings (scan behind current_constructor_standings)",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "standings",
+        "vgi.doc_llm": "The scan behind the current_constructor_standings table. Prefer the table; use constructor_standings() for another season or a specific round.",
+        "vgi.doc_md": "Returns the current constructors' championship. Selecting the table is clearer.",
+        "vgi.example_queries": "[{\"description\": \"Current constructors' leader from the backing scan.\", \"sql\": \"SELECT constructor_name, points FROM f1.main.all_current_constructor_standings() WHERE position = 1\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"season\",\"type\":\"INTEGER\",\"description\":\"Championship season year\"},{\"name\":\"round\",\"type\":\"INTEGER\",\"description\":\"Round number after which these standings apply\"},{\"name\":\"position\",\"type\":\"INTEGER\",\"description\":\"Constructors' championship position (1 = leader); null when unclassified\"},{\"name\":\"position_text\",\"type\":\"VARCHAR\",\"description\":\"Championship position as published\"},{\"name\":\"points\",\"type\":\"DECIMAL(7,2)\",\"description\":\"Count of constructors' championship points as an exact decimal\"},{\"name\":\"wins\",\"type\":\"INTEGER\",\"description\":\"Number of Grand Prix wins so far this season\"},{\"name\":\"constructor_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast constructor identifier\"},{\"name\":\"constructor_name\",\"type\":\"VARCHAR\",\"description\":\"Constructor (team) name\"},{\"name\":\"constructor_nationality\",\"type\":\"VARCHAR\",\"description\":\"Nationality the team races under, as a demonym, for example Italian\"}]",
+        "vgi.title": "Current Constructors' Championship (scan)"
+      },
+      null,
+      [],
+      [],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22599,
+      [
+        "SELECT constructor_name, points FROM f1.main.all_current_constructor_standings() WHERE position = 1"
+      ],
+      null,
+      [
+        "formula-1",
+        "standings"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "all_current_driver_standings",
+      null,
+      "table",
+      "Current F1 drivers' championship standings (scan behind current_driver_standings)",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "standings",
+        "vgi.doc_llm": "The scan behind the current_driver_standings table. Prefer the table; use driver_standings() for another season or the standings after a specific round.",
+        "vgi.doc_md": "Returns the current drivers' championship. Selecting `current_driver_standings` is clearer.",
+        "vgi.example_queries": "[{\"description\": \"Current championship top five from the backing scan.\", \"sql\": \"SELECT position, driver_name, points FROM f1.main.all_current_driver_standings() ORDER BY position LIMIT 5\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"season\",\"type\":\"INTEGER\",\"description\":\"Championship season year\"},{\"name\":\"round\",\"type\":\"INTEGER\",\"description\":\"Round number after which these standings apply\"},{\"name\":\"position\",\"type\":\"INTEGER\",\"description\":\"Championship position (1 = leader); null when unclassified\"},{\"name\":\"position_text\",\"type\":\"VARCHAR\",\"description\":\"Championship position as published, '-' when unclassified\"},{\"name\":\"points\",\"type\":\"DECIMAL(7,2)\",\"description\":\"Count of championship points as an exact decimal (half points exist)\"},{\"name\":\"wins\",\"type\":\"INTEGER\",\"description\":\"Number of Grand Prix wins so far this season\"},{\"name\":\"driver_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast driver identifier\"},{\"name\":\"driver_code\",\"type\":\"VARCHAR\",\"description\":\"Three-letter driver code\"},{\"name\":\"permanent_number\",\"type\":\"INTEGER\",\"description\":\"Driver's permanent car number (chosen race number)\"},{\"name\":\"driver_name\",\"type\":\"VARCHAR\",\"description\":\"Driver's full name\"},{\"name\":\"driver_nationality\",\"type\":\"VARCHAR\",\"description\":\"Nationality of the driver as a demonym, for example British\"},{\"name\":\"constructor_id\",\"type\":\"VARCHAR\",\"description\":\"Constructor identifier when the driver raced for exactly one team; null otherwise\"},{\"name\":\"constructor_name\",\"type\":\"VARCHAR\",\"description\":\"Constructor name when the driver raced for exactly one team; null otherwise\"},{\"name\":\"constructor_ids\",\"type\":\"VARCHAR\",\"description\":\"Comma-separated constructor identifiers this season\"},{\"name\":\"constructor_names\",\"type\":\"VARCHAR\",\"description\":\"Comma-separated constructor names this season\"}]",
+        "vgi.title": "Current Drivers' Championship (scan)"
+      },
+      null,
+      [],
+      [],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22600,
+      [
+        "SELECT position, driver_name, points FROM f1.main.all_current_driver_standings() ORDER BY position LIMIT 5"
+      ],
+      null,
+      [
+        "formula-1",
+        "standings"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "all_current_schedule",
+      null,
+      "table",
+      "Current F1 season calendar (scan behind current_schedule)",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "schedule",
+        "vgi.doc_llm": "The scan behind the current_schedule table. Prefer the table; use schedule() for other seasons.",
+        "vgi.doc_md": "Returns the current season calendar. Selecting `current_schedule` is clearer.",
+        "vgi.example_queries": "[{\"description\": \"Sprint weekends this season from the backing scan.\", \"sql\": \"SELECT round, race_name FROM f1.main.all_current_schedule() WHERE is_sprint_weekend\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"season\",\"type\":\"INTEGER\",\"description\":\"Championship season year\"},{\"name\":\"round\",\"type\":\"INTEGER\",\"description\":\"Round number within the season (1 = first race)\"},{\"name\":\"race_name\",\"type\":\"VARCHAR\",\"description\":\"Grand Prix name\"},{\"name\":\"circuit_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast circuit identifier\"},{\"name\":\"circuit_name\",\"type\":\"VARCHAR\",\"description\":\"Full circuit name, for example Autodromo Nazionale di Monza\"},{\"name\":\"locality\",\"type\":\"VARCHAR\",\"description\":\"City or locality of the circuit\"},{\"name\":\"country\",\"type\":\"VARCHAR\",\"description\":\"Country of the circuit\"},{\"name\":\"race_date\",\"type\":\"DATE\",\"description\":\"Calendar date of the Grand Prix (local to the circuit)\"},{\"name\":\"race_start_utc\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Scheduled race start in UTC; null when no time is published\"},{\"name\":\"first_practice_utc\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"First practice start in UTC\"},{\"name\":\"second_practice_utc\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Second practice start in UTC\"},{\"name\":\"third_practice_utc\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Third practice start in UTC; null on sprint weekends\"},{\"name\":\"sprint_qualifying_utc\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Sprint qualifying (or sprint shootout) start in UTC\"},{\"name\":\"sprint_utc\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Sprint race start in UTC; null on non-sprint weekends\"},{\"name\":\"qualifying_utc\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Grand Prix qualifying start in UTC\"},{\"name\":\"is_sprint_weekend\",\"type\":\"BOOLEAN\",\"description\":\"Whether the weekend includes a sprint race\"},{\"name\":\"wikipedia_url\",\"type\":\"VARCHAR\",\"description\":\"Wikipedia article for the race\"}]",
+        "vgi.title": "Current Season Calendar (scan)"
+      },
+      null,
+      [],
+      [],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22601,
+      [
+        "SELECT round, race_name FROM f1.main.all_current_schedule() WHERE is_sprint_weekend"
+      ],
+      null,
+      [
+        "formula-1",
+        "schedule"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "all_last_race_results",
+      null,
+      "table",
+      "Classification of the most recent F1 Grand Prix (scan behind last_race_results)",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "results",
+        "vgi.doc_llm": "The scan behind the last_race_results table. Prefer the table; use race_results() for any other race.",
+        "vgi.doc_md": "Returns the most recent Grand Prix classification. Selecting `last_race_results` is clearer.",
+        "vgi.example_queries": "[{\"description\": \"Podium of the most recent race from the backing scan.\", \"sql\": \"SELECT position, driver_name, constructor_name FROM f1.main.all_last_race_results() WHERE position <= 3 ORDER BY position\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"season\",\"type\":\"INTEGER\",\"description\":\"Championship season year\"},{\"name\":\"round\",\"type\":\"INTEGER\",\"description\":\"Round number within the season (1 = first race)\"},{\"name\":\"race_name\",\"type\":\"VARCHAR\",\"description\":\"Grand Prix name, for example Bahrain Grand Prix\"},{\"name\":\"race_date\",\"type\":\"DATE\",\"description\":\"Calendar date of the Grand Prix (local to the circuit)\"},{\"name\":\"circuit_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast circuit identifier\"},{\"name\":\"circuit_name\",\"type\":\"VARCHAR\",\"description\":\"Full circuit name, for example Autodromo Nazionale di Monza\"},{\"name\":\"country\",\"type\":\"VARCHAR\",\"description\":\"Country of the circuit\"},{\"name\":\"position\",\"type\":\"INTEGER\",\"description\":\"Finishing position (classification order, including retirements)\"},{\"name\":\"position_text\",\"type\":\"VARCHAR\",\"description\":\"Published classification: a number, or R retired, D disqualified, E excluded, W withdrawn, F failed to qualify, N not classified\"},{\"name\":\"classified\",\"type\":\"BOOLEAN\",\"description\":\"Whether position_text is numeric, i.e. the driver was classified\"},{\"name\":\"points\",\"type\":\"DECIMAL(7,2)\",\"description\":\"Championship points scored in this race\"},{\"name\":\"car_number\",\"type\":\"INTEGER\",\"description\":\"Race number displayed on the car (not a position)\"},{\"name\":\"driver_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast driver identifier, for example hamilton\"},{\"name\":\"driver_code\",\"type\":\"VARCHAR\",\"description\":\"Three-letter driver code, for example HAM\"},{\"name\":\"driver_name\",\"type\":\"VARCHAR\",\"description\":\"Driver's full name\"},{\"name\":\"driver_nationality\",\"type\":\"VARCHAR\",\"description\":\"Nationality of the driver as a demonym, for example British\"},{\"name\":\"constructor_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast constructor identifier\"},{\"name\":\"constructor_name\",\"type\":\"VARCHAR\",\"description\":\"Constructor (team) name\"},{\"name\":\"grid\",\"type\":\"INTEGER\",\"description\":\"Starting grid position (1 = pole); 0 means a pit-lane start\"},{\"name\":\"laps\",\"type\":\"INTEGER\",\"description\":\"Number of laps completed\"},{\"name\":\"status\",\"type\":\"VARCHAR\",\"description\":\"Finishing status, for example Finished, +1 Lap, or Engine\"},{\"name\":\"race_time_millis\",\"type\":\"BIGINT\",\"description\":\"Elapsed race time in milliseconds as published; usually null for lapped or retired cars, but the archive also records it for some of them\"},{\"name\":\"race_time\",\"type\":\"VARCHAR\",\"description\":\"Published race time: absolute for the winner, a gap such as +5.123 for others; null when none is published\"},{\"name\":\"fastest_lap_rank\",\"type\":\"INTEGER\",\"description\":\"Rank of this driver's fastest lap among all drivers (1 = fastest)\"},{\"name\":\"fastest_lap_number\",\"type\":\"INTEGER\",\"description\":\"Lap number on which the driver set their fastest lap\"},{\"name\":\"fastest_lap_time\",\"type\":\"VARCHAR\",\"description\":\"Fastest lap time as published, for example 1:32.608\"},{\"name\":\"fastest_lap_seconds\",\"type\":\"DECIMAL(10,3)\",\"description\":\"Fastest lap time in seconds as an exact decimal\"},{\"name\":\"fastest_lap_avg_speed_kph\",\"type\":\"DOUBLE\",\"description\":\"Average speed of the fastest lap in km/h; null where the archive does not publish it (sprints and races from 2025 onwards)\"}]",
+        "vgi.title": "Latest Grand Prix Result (scan)"
+      },
+      null,
+      [],
+      [],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22602,
+      [
+        "SELECT position, driver_name, constructor_name FROM f1.main.all_last_race_results() WHERE position <= 3 ORDER BY position"
+      ],
+      null,
+      [
+        "formula-1",
+        "results"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "all_seasons",
+      null,
+      "table",
+      "Every Formula 1 World Championship season since 1950 (scan behind seasons)",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "reference",
+        "vgi.doc_llm": "The scan behind the seasons table. Prefer the table.",
+        "vgi.doc_md": "Lists every championship season in the archive. Selecting `seasons` is clearer.",
+        "vgi.example_queries": "[{\"description\": \"Number of championship seasons from the backing scan.\", \"sql\": \"SELECT count(*) AS seasons FROM f1.main.all_seasons()\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"season\",\"type\":\"INTEGER\",\"description\":\"Championship season year\"},{\"name\":\"wikipedia_url\",\"type\":\"VARCHAR\",\"description\":\"Wikipedia article for the season\"}]",
+        "vgi.title": "F1 Seasons (scan)"
+      },
+      null,
+      [],
+      [],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22603,
+      [
+        "SELECT count(*) AS seasons FROM f1.main.all_seasons()"
+      ],
+      null,
+      [
+        "formula-1",
+        "reference"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "circuits",
+      null,
+      "table",
+      "Circuits used in a season, or every World Championship circuit",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "reference",
+        "vgi.doc_llm": "One row per circuit with identifier, name, locality, country, and coordinates.",
+        "vgi.doc_md": "Circuit reference data keyed by `circuit_id`, with decimal-degree coordinates.",
+        "vgi.example_queries": "[{\"description\": \"Circuits on the 2024 calendar by country.\", \"sql\": \"SELECT circuit_name, locality, country FROM f1.main.circuits(season := 2024) ORDER BY country\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"circuit_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast circuit identifier\"},{\"name\":\"circuit_name\",\"type\":\"VARCHAR\",\"description\":\"Full circuit name, for example Autodromo Nazionale di Monza\"},{\"name\":\"locality\",\"type\":\"VARCHAR\",\"description\":\"City or locality of the circuit\"},{\"name\":\"country\",\"type\":\"VARCHAR\",\"description\":\"Country of the circuit\"},{\"name\":\"latitude\",\"type\":\"DOUBLE\",\"description\":\"Latitude in decimal degrees\"},{\"name\":\"longitude\",\"type\":\"DOUBLE\",\"description\":\"Longitude in decimal degrees\"},{\"name\":\"wikipedia_url\",\"type\":\"VARCHAR\",\"description\":\"Wikipedia article for the circuit\"}]",
+        "vgi.title": "F1 Circuits"
+      },
+      null,
+      [
+        "season"
+      ],
+      [
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22604,
+      [
+        "SELECT circuit_name, locality, country FROM f1.main.circuits(season := 2024) ORDER BY country"
+      ],
+      null,
+      [
+        "formula-1",
+        "reference"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "constructor_standings",
+      null,
+      "table",
+      "Constructors' championship standings for a season (1958 onwards), optionally after a round",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "standings",
+        "vgi.doc_llm": "One row per constructor in the constructors' championship, which began in 1958 (earlier seasons return no rows). Use round := N for the standings after round N.",
+        "vgi.doc_md": "Constructors' championship standings with exact decimal points.",
+        "vgi.example_queries": "[{\"description\": \"Final 2024 constructors' championship.\", \"sql\": \"SELECT position, constructor_name, points, wins FROM f1.main.constructor_standings(2024) ORDER BY position\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"season\",\"type\":\"INTEGER\",\"description\":\"Championship season year\"},{\"name\":\"round\",\"type\":\"INTEGER\",\"description\":\"Round number after which these standings apply\"},{\"name\":\"position\",\"type\":\"INTEGER\",\"description\":\"Constructors' championship position (1 = leader); null when unclassified\"},{\"name\":\"position_text\",\"type\":\"VARCHAR\",\"description\":\"Championship position as published\"},{\"name\":\"points\",\"type\":\"DECIMAL(7,2)\",\"description\":\"Count of constructors' championship points as an exact decimal\"},{\"name\":\"wins\",\"type\":\"INTEGER\",\"description\":\"Number of Grand Prix wins so far this season\"},{\"name\":\"constructor_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast constructor identifier\"},{\"name\":\"constructor_name\",\"type\":\"VARCHAR\",\"description\":\"Constructor (team) name\"},{\"name\":\"constructor_nationality\",\"type\":\"VARCHAR\",\"description\":\"Nationality the team races under, as a demonym, for example Italian\"}]",
+        "vgi.title": "F1 Constructors' Championship"
+      },
+      null,
+      [
+        "season",
+        "round"
+      ],
+      [
+        "INTEGER",
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22605,
+      [
+        "SELECT position, constructor_name, points, wins FROM f1.main.constructor_standings(2024) ORDER BY position"
+      ],
+      null,
+      [
+        "formula-1",
+        "standings"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "constructors",
+      null,
+      "table",
+      "Constructors that entered a season, or every constructor since 1950",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "reference",
+        "vgi.doc_llm": "One row per constructor (team) with identifier, name, and nationality.",
+        "vgi.doc_md": "Constructor reference data keyed by `constructor_id`.",
+        "vgi.example_queries": "[{\"description\": \"The 2024 constructors.\", \"sql\": \"SELECT constructor_id, constructor_name, nationality FROM f1.main.constructors(season := 2024)\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"constructor_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast constructor identifier\"},{\"name\":\"constructor_name\",\"type\":\"VARCHAR\",\"description\":\"Constructor (team) name\"},{\"name\":\"nationality\",\"type\":\"VARCHAR\",\"description\":\"Constructor nationality\"},{\"name\":\"wikipedia_url\",\"type\":\"VARCHAR\",\"description\":\"Wikipedia article for the constructor\"}]",
+        "vgi.title": "F1 Constructors"
+      },
+      null,
+      [
+        "season"
+      ],
+      [
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22606,
+      [
+        "SELECT constructor_id, constructor_name, nationality FROM f1.main.constructors(season := 2024)"
+      ],
+      null,
+      [
+        "formula-1",
+        "reference"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "driver_results",
+      null,
+      "table",
+      "Every Grand Prix result for one driver, optionally limited to a season",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "results",
+        "vgi.doc_llm": "One row per Grand Prix the driver entered, across their career or in one season. Use it for career wins, podiums, points, or finishing records. Get driver_id from drivers().",
+        "vgi.doc_md": "A driver's race-by-race history with the same columns as `race_results()`.",
+        "vgi.example_queries": "[{\"description\": \"Lewis Hamilton's career wins and podiums.\", \"sql\": \"SELECT count(*) FILTER (WHERE position = 1) AS wins, count(*) FILTER (WHERE position <= 3) AS podiums FROM f1.main.driver_results('hamilton')\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"season\",\"type\":\"INTEGER\",\"description\":\"Championship season year\"},{\"name\":\"round\",\"type\":\"INTEGER\",\"description\":\"Round number within the season (1 = first race)\"},{\"name\":\"race_name\",\"type\":\"VARCHAR\",\"description\":\"Grand Prix name, for example Bahrain Grand Prix\"},{\"name\":\"race_date\",\"type\":\"DATE\",\"description\":\"Calendar date of the Grand Prix (local to the circuit)\"},{\"name\":\"circuit_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast circuit identifier\"},{\"name\":\"circuit_name\",\"type\":\"VARCHAR\",\"description\":\"Full circuit name, for example Autodromo Nazionale di Monza\"},{\"name\":\"country\",\"type\":\"VARCHAR\",\"description\":\"Country of the circuit\"},{\"name\":\"position\",\"type\":\"INTEGER\",\"description\":\"Finishing position (classification order, including retirements)\"},{\"name\":\"position_text\",\"type\":\"VARCHAR\",\"description\":\"Published classification: a number, or R retired, D disqualified, E excluded, W withdrawn, F failed to qualify, N not classified\"},{\"name\":\"classified\",\"type\":\"BOOLEAN\",\"description\":\"Whether position_text is numeric, i.e. the driver was classified\"},{\"name\":\"points\",\"type\":\"DECIMAL(7,2)\",\"description\":\"Championship points scored in this race\"},{\"name\":\"car_number\",\"type\":\"INTEGER\",\"description\":\"Race number displayed on the car (not a position)\"},{\"name\":\"driver_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast driver identifier, for example hamilton\"},{\"name\":\"driver_code\",\"type\":\"VARCHAR\",\"description\":\"Three-letter driver code, for example HAM\"},{\"name\":\"driver_name\",\"type\":\"VARCHAR\",\"description\":\"Driver's full name\"},{\"name\":\"driver_nationality\",\"type\":\"VARCHAR\",\"description\":\"Nationality of the driver as a demonym, for example British\"},{\"name\":\"constructor_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast constructor identifier\"},{\"name\":\"constructor_name\",\"type\":\"VARCHAR\",\"description\":\"Constructor (team) name\"},{\"name\":\"grid\",\"type\":\"INTEGER\",\"description\":\"Starting grid position (1 = pole); 0 means a pit-lane start\"},{\"name\":\"laps\",\"type\":\"INTEGER\",\"description\":\"Number of laps completed\"},{\"name\":\"status\",\"type\":\"VARCHAR\",\"description\":\"Finishing status, for example Finished, +1 Lap, or Engine\"},{\"name\":\"race_time_millis\",\"type\":\"BIGINT\",\"description\":\"Elapsed race time in milliseconds as published; usually null for lapped or retired cars, but the archive also records it for some of them\"},{\"name\":\"race_time\",\"type\":\"VARCHAR\",\"description\":\"Published race time: absolute for the winner, a gap such as +5.123 for others; null when none is published\"},{\"name\":\"fastest_lap_rank\",\"type\":\"INTEGER\",\"description\":\"Rank of this driver's fastest lap among all drivers (1 = fastest)\"},{\"name\":\"fastest_lap_number\",\"type\":\"INTEGER\",\"description\":\"Lap number on which the driver set their fastest lap\"},{\"name\":\"fastest_lap_time\",\"type\":\"VARCHAR\",\"description\":\"Fastest lap time as published, for example 1:32.608\"},{\"name\":\"fastest_lap_seconds\",\"type\":\"DECIMAL(10,3)\",\"description\":\"Fastest lap time in seconds as an exact decimal\"},{\"name\":\"fastest_lap_avg_speed_kph\",\"type\":\"DOUBLE\",\"description\":\"Average speed of the fastest lap in km/h; null where the archive does not publish it (sprints and races from 2025 onwards)\"}]",
+        "vgi.title": "F1 Driver Race History"
+      },
+      null,
+      [
+        "driver_id",
+        "season"
+      ],
+      [
+        "VARCHAR",
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22607,
+      [
+        "SELECT count(*) FILTER (WHERE position = 1) AS wins, count(*) FILTER (WHERE position <= 3) AS podiums FROM f1.main.driver_results('hamilton')"
+      ],
+      null,
+      [
+        "formula-1",
+        "results"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "driver_standings",
+      null,
+      "table",
+      "Drivers' championship standings for a season, optionally after a given round",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "standings",
+        "vgi.doc_llm": "One row per driver in the drivers' championship. Pass a season for the final (or latest) standings, and round := N for the standings after round N. Points are exact decimals. constructor_id is null when a driver raced for more than one team that season; constructor_ids lists every team.",
+        "vgi.doc_md": "Drivers' championship standings. `round := N` returns the table as it stood after round N. `position` is null for unclassified drivers while `position_text` keeps the published marker.",
+        "vgi.example_queries": "[{\"description\": \"Final 2024 drivers' championship.\", \"sql\": \"SELECT position, driver_name, constructor_name, points, wins FROM f1.main.driver_standings(2024) ORDER BY position\"}, {\"description\": \"The 2024 championship after round 10.\", \"sql\": \"SELECT position, driver_name, points FROM f1.main.driver_standings(2024, round := 10) ORDER BY position LIMIT 5\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"season\",\"type\":\"INTEGER\",\"description\":\"Championship season year\"},{\"name\":\"round\",\"type\":\"INTEGER\",\"description\":\"Round number after which these standings apply\"},{\"name\":\"position\",\"type\":\"INTEGER\",\"description\":\"Championship position (1 = leader); null when unclassified\"},{\"name\":\"position_text\",\"type\":\"VARCHAR\",\"description\":\"Championship position as published, '-' when unclassified\"},{\"name\":\"points\",\"type\":\"DECIMAL(7,2)\",\"description\":\"Count of championship points as an exact decimal (half points exist)\"},{\"name\":\"wins\",\"type\":\"INTEGER\",\"description\":\"Number of Grand Prix wins so far this season\"},{\"name\":\"driver_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast driver identifier\"},{\"name\":\"driver_code\",\"type\":\"VARCHAR\",\"description\":\"Three-letter driver code\"},{\"name\":\"permanent_number\",\"type\":\"INTEGER\",\"description\":\"Driver's permanent car number (chosen race number)\"},{\"name\":\"driver_name\",\"type\":\"VARCHAR\",\"description\":\"Driver's full name\"},{\"name\":\"driver_nationality\",\"type\":\"VARCHAR\",\"description\":\"Nationality of the driver as a demonym, for example British\"},{\"name\":\"constructor_id\",\"type\":\"VARCHAR\",\"description\":\"Constructor identifier when the driver raced for exactly one team; null otherwise\"},{\"name\":\"constructor_name\",\"type\":\"VARCHAR\",\"description\":\"Constructor name when the driver raced for exactly one team; null otherwise\"},{\"name\":\"constructor_ids\",\"type\":\"VARCHAR\",\"description\":\"Comma-separated constructor identifiers this season\"},{\"name\":\"constructor_names\",\"type\":\"VARCHAR\",\"description\":\"Comma-separated constructor names this season\"}]",
+        "vgi.title": "F1 Drivers' Championship"
+      },
+      null,
+      [
+        "season",
+        "round"
+      ],
+      [
+        "INTEGER",
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22608,
+      [
+        "SELECT position, driver_name, constructor_name, points, wins FROM f1.main.driver_standings(2024) ORDER BY position",
+        "SELECT position, driver_name, points FROM f1.main.driver_standings(2024, round := 10) ORDER BY position LIMIT 5"
+      ],
+      null,
+      [
+        "formula-1",
+        "standings"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "drivers",
+      null,
+      "table",
+      "Drivers who entered a season, or every World Championship driver",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "reference",
+        "vgi.doc_llm": "One row per driver with identifier, code, permanent number, name, date of birth, and nationality. Use it to find driver_id values for other functions. Without a season it returns all ~880 drivers since 1950 (several upstream pages).",
+        "vgi.doc_md": "Driver reference data. `driver_id` is the key used by every other Jolpica function.",
+        "vgi.example_queries": "[{\"description\": \"The 2024 grid.\", \"sql\": \"SELECT driver_id, driver_code, driver_name, nationality FROM f1.main.drivers(season := 2024) ORDER BY family_name\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"driver_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast driver identifier\"},{\"name\":\"driver_code\",\"type\":\"VARCHAR\",\"description\":\"Three-letter driver code, when assigned\"},{\"name\":\"permanent_number\",\"type\":\"INTEGER\",\"description\":\"Driver's permanent car number, when assigned\"},{\"name\":\"given_name\",\"type\":\"VARCHAR\",\"description\":\"Given name\"},{\"name\":\"family_name\",\"type\":\"VARCHAR\",\"description\":\"Family name\"},{\"name\":\"driver_name\",\"type\":\"VARCHAR\",\"description\":\"Full name\"},{\"name\":\"date_of_birth\",\"type\":\"DATE\",\"description\":\"Date of birth\"},{\"name\":\"nationality\",\"type\":\"VARCHAR\",\"description\":\"Nationality\"},{\"name\":\"wikipedia_url\",\"type\":\"VARCHAR\",\"description\":\"Wikipedia article for the driver\"}]",
+        "vgi.title": "F1 Drivers"
+      },
+      null,
+      [
+        "season"
+      ],
+      [
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22609,
+      [
+        "SELECT driver_id, driver_code, driver_name, nationality FROM f1.main.drivers(season := 2024) ORDER BY family_name"
+      ],
+      null,
+      [
+        "formula-1",
+        "reference"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "lap_times",
+      null,
+      "table",
+      "Lap-by-lap times and running positions for one Grand Prix (1996 onwards)",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "timing",
+        "vgi.doc_llm": "One row per driver per lap of one race, with running position and lap time. Requires season and round; pass driver_id := '...' to fetch a single driver cheaply. A full race is roughly 1,000-1,400 rows fetched over 10-15 upstream pages.",
+        "vgi.doc_md": "Race lap times from 1996 onwards. Filtering by `driver_id` is pushed to the API and is much cheaper than filtering in SQL.",
+        "vgi.example_queries": "[{\"description\": \"Max Verstappen's laps in the 2024 Chinese Grand Prix.\", \"sql\": \"SELECT lap, position, lap_time FROM f1.main.lap_times(2024, 5, driver_id := 'max_verstappen') ORDER BY lap\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"season\",\"type\":\"INTEGER\",\"description\":\"Championship season year\"},{\"name\":\"round\",\"type\":\"INTEGER\",\"description\":\"Round number within the season (1 = first race)\"},{\"name\":\"race_name\",\"type\":\"VARCHAR\",\"description\":\"Grand Prix name\"},{\"name\":\"lap\",\"type\":\"INTEGER\",\"description\":\"Lap number\"},{\"name\":\"driver_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast driver identifier\"},{\"name\":\"position\",\"type\":\"INTEGER\",\"description\":\"Running position at the end of the lap\"},{\"name\":\"lap_time\",\"type\":\"VARCHAR\",\"description\":\"Lap time as published, for example 1:41.528\"},{\"name\":\"lap_time_seconds\",\"type\":\"DECIMAL(10,3)\",\"description\":\"Lap time in seconds as an exact decimal\"}]",
+        "vgi.title": "F1 Race Lap Times"
+      },
+      null,
+      [
+        "season",
+        "round",
+        "driver_id"
+      ],
+      [
+        "INTEGER",
+        "INTEGER",
+        "VARCHAR"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22610,
+      [
+        "SELECT lap, position, lap_time FROM f1.main.lap_times(2024, 5, driver_id := 'max_verstappen') ORDER BY lap"
+      ],
+      null,
+      [
+        "formula-1",
+        "timing"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "meetings",
+      null,
+      "table",
+      "OpenF1 meetings (race weekends and tests) for a season, 2023 onwards",
+      null,
+      {
+        "provider": "openf1",
+        "vgi.category": "sessions",
+        "vgi.doc_llm": "One row per race weekend or test in a season from 2023, with OpenF1's meeting_key, official event name, circuit, country, and UTC start and end.",
+        "vgi.doc_md": "OpenF1 meetings. `meeting_key` links to `sessions()`.",
+        "vgi.example_queries": "[{\"description\": \"2024 race weekends on street circuits.\", \"sql\": \"SELECT meeting_name, location FROM f1.main.meetings(2024) WHERE circuit_type LIKE '%Street%' ORDER BY date_start\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"meeting_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 meeting (race weekend) key\"},{\"name\":\"meeting_name\",\"type\":\"VARCHAR\",\"description\":\"Meeting name, for example Bahrain Grand Prix\"},{\"name\":\"meeting_official_name\",\"type\":\"VARCHAR\",\"description\":\"Official sponsored event name\"},{\"name\":\"year\",\"type\":\"INTEGER\",\"description\":\"Season year\"},{\"name\":\"location\",\"type\":\"VARCHAR\",\"description\":\"Meeting location\"},{\"name\":\"country_code\",\"type\":\"VARCHAR\",\"description\":\"Three-letter country code\"},{\"name\":\"country_name\",\"type\":\"VARCHAR\",\"description\":\"Country name\"},{\"name\":\"circuit_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 circuit key\"},{\"name\":\"circuit_short_name\",\"type\":\"VARCHAR\",\"description\":\"Short circuit name\"},{\"name\":\"circuit_type\",\"type\":\"VARCHAR\",\"description\":\"Circuit type, for example Permanent or Temporary - Street\"},{\"name\":\"date_start\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Start of the meeting in UTC\"},{\"name\":\"date_end\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"End of the meeting in UTC\"},{\"name\":\"gmt_offset\",\"type\":\"VARCHAR\",\"description\":\"Local UTC offset of the venue, for example 03:00:00\"},{\"name\":\"is_cancelled\",\"type\":\"BOOLEAN\",\"description\":\"Whether the meeting was cancelled\"}]",
+        "vgi.title": "F1 Race Weekends (OpenF1)"
+      },
+      null,
+      [
+        "season"
+      ],
+      [
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22611,
+      [
+        "SELECT meeting_name, location FROM f1.main.meetings(2024) WHERE circuit_type LIKE '%Street%' ORDER BY date_start"
+      ],
+      null,
+      [
+        "formula-1",
+        "sessions"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "pit_stops",
+      null,
+      "table",
+      "Pit stops for one Grand Prix (2011 onwards)",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "timing",
+        "vgi.doc_llm": "One row per pit stop in one race: driver, stop number, lap, and pit-lane duration. Durations are entry-to-exit pit-lane times, not stationary times; red-flag stops can be many minutes long.",
+        "vgi.doc_md": "Pit stops from 2011 onwards. `duration_seconds` is an exact decimal.",
+        "vgi.example_queries": "[{\"description\": \"Fastest pit-lane times in the 2024 Chinese Grand Prix.\", \"sql\": \"SELECT driver_id, lap, duration_seconds FROM f1.main.pit_stops(2024, 5) ORDER BY duration_seconds LIMIT 5\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"season\",\"type\":\"INTEGER\",\"description\":\"Championship season year\"},{\"name\":\"round\",\"type\":\"INTEGER\",\"description\":\"Round number within the season (1 = first race)\"},{\"name\":\"race_name\",\"type\":\"VARCHAR\",\"description\":\"Grand Prix name\"},{\"name\":\"driver_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast driver identifier\"},{\"name\":\"stop\",\"type\":\"INTEGER\",\"description\":\"Stop number for this driver in this race\"},{\"name\":\"lap\",\"type\":\"INTEGER\",\"description\":\"Lap on which the stop was made\"},{\"name\":\"time_of_day\",\"type\":\"VARCHAR\",\"description\":\"Local time of day of the stop, as published\"},{\"name\":\"duration\",\"type\":\"VARCHAR\",\"description\":\"Pit-lane duration as published (entry to exit, not stationary time)\"},{\"name\":\"duration_seconds\",\"type\":\"DECIMAL(10,3)\",\"description\":\"Pit-lane duration in seconds as an exact decimal\"}]",
+        "vgi.title": "F1 Pit Stops"
+      },
+      null,
+      [
+        "season",
+        "round"
+      ],
+      [
+        "INTEGER",
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22612,
+      [
+        "SELECT driver_id, lap, duration_seconds FROM f1.main.pit_stops(2024, 5) ORDER BY duration_seconds LIMIT 5"
+      ],
+      null,
+      [
+        "formula-1",
+        "timing"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "qualifying_results",
+      null,
+      "table",
+      "Grand Prix qualifying classifications with Q1, Q2, and Q3 times",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "results",
+        "vgi.doc_llm": "One row per driver per qualifying session with Q1/Q2/Q3 lap times as published and as exact seconds. Pass round := N for one event or omit it for the season. Qualifying position is not always the starting grid (penalties); use race_results().grid for that.",
+        "vgi.doc_md": "Qualifying results. Knockout-phase times are null for phases a driver did not reach.",
+        "vgi.example_queries": "[{\"description\": \"Pole sitters in 2024.\", \"sql\": \"SELECT round, race_name, driver_name, q3 FROM f1.main.qualifying_results(2024) WHERE position = 1 ORDER BY round\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"season\",\"type\":\"INTEGER\",\"description\":\"Championship season year\"},{\"name\":\"round\",\"type\":\"INTEGER\",\"description\":\"Round number within the season (1 = first race)\"},{\"name\":\"race_name\",\"type\":\"VARCHAR\",\"description\":\"Grand Prix name, for example Bahrain Grand Prix\"},{\"name\":\"race_date\",\"type\":\"DATE\",\"description\":\"Calendar date of the Grand Prix (local to the circuit)\"},{\"name\":\"circuit_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast circuit identifier\"},{\"name\":\"circuit_name\",\"type\":\"VARCHAR\",\"description\":\"Full circuit name, for example Autodromo Nazionale di Monza\"},{\"name\":\"country\",\"type\":\"VARCHAR\",\"description\":\"Country of the circuit\"},{\"name\":\"position\",\"type\":\"INTEGER\",\"description\":\"Qualifying classification position\"},{\"name\":\"car_number\",\"type\":\"INTEGER\",\"description\":\"Car number\"},{\"name\":\"driver_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast driver identifier, for example hamilton\"},{\"name\":\"driver_code\",\"type\":\"VARCHAR\",\"description\":\"Three-letter driver code, for example HAM\"},{\"name\":\"driver_name\",\"type\":\"VARCHAR\",\"description\":\"Driver's full name\"},{\"name\":\"driver_nationality\",\"type\":\"VARCHAR\",\"description\":\"Nationality of the driver as a demonym, for example British\"},{\"name\":\"constructor_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast constructor identifier\"},{\"name\":\"constructor_name\",\"type\":\"VARCHAR\",\"description\":\"Constructor (team) name\"},{\"name\":\"q1\",\"type\":\"VARCHAR\",\"description\":\"Best Q1 lap time as published; null if no time was set\"},{\"name\":\"q2\",\"type\":\"VARCHAR\",\"description\":\"Best Q2 lap time as published; null if eliminated in Q1\"},{\"name\":\"q3\",\"type\":\"VARCHAR\",\"description\":\"Best Q3 lap time as published; null if eliminated before Q3\"},{\"name\":\"q1_seconds\",\"type\":\"DECIMAL(10,3)\",\"description\":\"Best Q1 lap time in seconds\"},{\"name\":\"q2_seconds\",\"type\":\"DECIMAL(10,3)\",\"description\":\"Best Q2 lap time in seconds\"},{\"name\":\"q3_seconds\",\"type\":\"DECIMAL(10,3)\",\"description\":\"Best Q3 lap time in seconds\"}]",
+        "vgi.title": "F1 Qualifying Results"
+      },
+      null,
+      [
+        "season",
+        "round"
+      ],
+      [
+        "INTEGER",
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22613,
+      [
+        "SELECT round, race_name, driver_name, q3 FROM f1.main.qualifying_results(2024) WHERE position = 1 ORDER BY round"
+      ],
+      null,
+      [
+        "formula-1",
+        "results"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "race_control",
+      null,
+      "table",
+      "Race control messages (flags, safety car, penalties, DRS) for one OpenF1 session",
+      null,
+      {
+        "provider": "openf1",
+        "vgi.category": "sessions",
+        "vgi.doc_llm": "One row per race control message: flags, safety car and virtual safety car periods, track limits and penalties, DRS status, and session status, with lap and UTC time.",
+        "vgi.doc_md": "Race control messages in time order. Filter on `category` or `flag`.",
+        "vgi.example_queries": "[{\"description\": \"Flags shown in the 2024 Bahrain Grand Prix.\", \"sql\": \"SELECT date, lap_number, flag, scope, message FROM f1.main.race_control(9472) WHERE category = 'Flag' ORDER BY date\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"session_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 session key\"},{\"name\":\"meeting_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 meeting (race weekend) key\"},{\"name\":\"date\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Time of the message, in UTC\"},{\"name\":\"lap_number\",\"type\":\"INTEGER\",\"description\":\"Race lap at the time of the message\"},{\"name\":\"category\",\"type\":\"VARCHAR\",\"description\":\"Message category: Flag, SafetyCar, Drs, CarEvent, SessionStatus, Other\"},{\"name\":\"flag\",\"type\":\"VARCHAR\",\"description\":\"Flag shown, for example GREEN, YELLOW, RED, CHEQUERED\"},{\"name\":\"scope\",\"type\":\"VARCHAR\",\"description\":\"Flag scope: Track, Sector, or Driver\"},{\"name\":\"sector\",\"type\":\"INTEGER\",\"description\":\"Marshal sector for sector-scoped flags\"},{\"name\":\"driver_number\",\"type\":\"INTEGER\",\"description\":\"Driver concerned, when the message targets one car\"},{\"name\":\"qualifying_phase\",\"type\":\"INTEGER\",\"description\":\"Qualifying phase (1-3) for qualifying messages\"},{\"name\":\"message\",\"type\":\"VARCHAR\",\"description\":\"Race control message text\"}]",
+        "vgi.title": "F1 Race Control Messages (OpenF1)"
+      },
+      null,
+      [
+        "session_key"
+      ],
+      [
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22614,
+      [
+        "SELECT date, lap_number, flag, scope, message FROM f1.main.race_control(9472) WHERE category = 'Flag' ORDER BY date"
+      ],
+      null,
+      [
+        "formula-1",
+        "sessions"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "race_results",
+      null,
+      "table",
+      "Grand Prix classifications for a season, or for one round",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "results",
+        "vgi.doc_llm": "One row per driver per Grand Prix: finishing position, published classification, points, grid, laps, status, race time, and fastest lap. Pass round := N for one race; omit it for every race of the season (useful for counting wins or podiums). Sprint races are separate: use sprint_results().",
+        "vgi.doc_md": "Grand Prix results. `position` is the classification order including retirements; `classified` is true only when `position_text` is numeric. `race_time_millis` is set for drivers on the lead lap. Fastest-lap seconds are exact decimals.",
+        "vgi.example_queries": "[{\"description\": \"Winners of every 2024 Grand Prix.\", \"sql\": \"SELECT round, race_name, driver_name, constructor_name FROM f1.main.race_results(2024) WHERE position = 1 ORDER BY round\"}, {\"description\": \"Full classification of the 2024 Chinese Grand Prix (round 5).\", \"sql\": \"SELECT position, driver_name, grid, status, points FROM f1.main.race_results(2024, round := 5) ORDER BY position\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"season\",\"type\":\"INTEGER\",\"description\":\"Championship season year\"},{\"name\":\"round\",\"type\":\"INTEGER\",\"description\":\"Round number within the season (1 = first race)\"},{\"name\":\"race_name\",\"type\":\"VARCHAR\",\"description\":\"Grand Prix name, for example Bahrain Grand Prix\"},{\"name\":\"race_date\",\"type\":\"DATE\",\"description\":\"Calendar date of the Grand Prix (local to the circuit)\"},{\"name\":\"circuit_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast circuit identifier\"},{\"name\":\"circuit_name\",\"type\":\"VARCHAR\",\"description\":\"Full circuit name, for example Autodromo Nazionale di Monza\"},{\"name\":\"country\",\"type\":\"VARCHAR\",\"description\":\"Country of the circuit\"},{\"name\":\"position\",\"type\":\"INTEGER\",\"description\":\"Finishing position (classification order, including retirements)\"},{\"name\":\"position_text\",\"type\":\"VARCHAR\",\"description\":\"Published classification: a number, or R retired, D disqualified, E excluded, W withdrawn, F failed to qualify, N not classified\"},{\"name\":\"classified\",\"type\":\"BOOLEAN\",\"description\":\"Whether position_text is numeric, i.e. the driver was classified\"},{\"name\":\"points\",\"type\":\"DECIMAL(7,2)\",\"description\":\"Championship points scored in this race\"},{\"name\":\"car_number\",\"type\":\"INTEGER\",\"description\":\"Race number displayed on the car (not a position)\"},{\"name\":\"driver_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast driver identifier, for example hamilton\"},{\"name\":\"driver_code\",\"type\":\"VARCHAR\",\"description\":\"Three-letter driver code, for example HAM\"},{\"name\":\"driver_name\",\"type\":\"VARCHAR\",\"description\":\"Driver's full name\"},{\"name\":\"driver_nationality\",\"type\":\"VARCHAR\",\"description\":\"Nationality of the driver as a demonym, for example British\"},{\"name\":\"constructor_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast constructor identifier\"},{\"name\":\"constructor_name\",\"type\":\"VARCHAR\",\"description\":\"Constructor (team) name\"},{\"name\":\"grid\",\"type\":\"INTEGER\",\"description\":\"Starting grid position (1 = pole); 0 means a pit-lane start\"},{\"name\":\"laps\",\"type\":\"INTEGER\",\"description\":\"Number of laps completed\"},{\"name\":\"status\",\"type\":\"VARCHAR\",\"description\":\"Finishing status, for example Finished, +1 Lap, or Engine\"},{\"name\":\"race_time_millis\",\"type\":\"BIGINT\",\"description\":\"Elapsed race time in milliseconds as published; usually null for lapped or retired cars, but the archive also records it for some of them\"},{\"name\":\"race_time\",\"type\":\"VARCHAR\",\"description\":\"Published race time: absolute for the winner, a gap such as +5.123 for others; null when none is published\"},{\"name\":\"fastest_lap_rank\",\"type\":\"INTEGER\",\"description\":\"Rank of this driver's fastest lap among all drivers (1 = fastest)\"},{\"name\":\"fastest_lap_number\",\"type\":\"INTEGER\",\"description\":\"Lap number on which the driver set their fastest lap\"},{\"name\":\"fastest_lap_time\",\"type\":\"VARCHAR\",\"description\":\"Fastest lap time as published, for example 1:32.608\"},{\"name\":\"fastest_lap_seconds\",\"type\":\"DECIMAL(10,3)\",\"description\":\"Fastest lap time in seconds as an exact decimal\"},{\"name\":\"fastest_lap_avg_speed_kph\",\"type\":\"DOUBLE\",\"description\":\"Average speed of the fastest lap in km/h; null where the archive does not publish it (sprints and races from 2025 onwards)\"}]",
+        "vgi.title": "F1 Grand Prix Results"
+      },
+      null,
+      [
+        "season",
+        "round"
+      ],
+      [
+        "INTEGER",
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22615,
+      [
+        "SELECT round, race_name, driver_name, constructor_name FROM f1.main.race_results(2024) WHERE position = 1 ORDER BY round",
+        "SELECT position, driver_name, grid, status, points FROM f1.main.race_results(2024, round := 5) ORDER BY position"
+      ],
+      null,
+      [
+        "formula-1",
+        "results"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "schedule",
+      null,
+      "table",
+      "The race calendar for one F1 season, with UTC session start times",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "schedule",
+        "vgi.doc_llm": "One row per round of the given season: Grand Prix name, circuit, country, race date and UTC start, practice, qualifying and sprint session starts, and whether it is a sprint weekend. Session times are null where the archive has none (most pre-2005 seasons).",
+        "vgi.doc_md": "Season calendar. Session starts are `TIMESTAMP WITH TIME ZONE` values in UTC; `race_date` is always present even when no start time is published.",
+        "vgi.example_queries": "[{\"description\": \"The 2024 calendar in round order.\", \"sql\": \"SELECT round, race_name, country, race_date FROM f1.main.schedule(2024) ORDER BY round\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"season\",\"type\":\"INTEGER\",\"description\":\"Championship season year\"},{\"name\":\"round\",\"type\":\"INTEGER\",\"description\":\"Round number within the season (1 = first race)\"},{\"name\":\"race_name\",\"type\":\"VARCHAR\",\"description\":\"Grand Prix name\"},{\"name\":\"circuit_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast circuit identifier\"},{\"name\":\"circuit_name\",\"type\":\"VARCHAR\",\"description\":\"Full circuit name, for example Autodromo Nazionale di Monza\"},{\"name\":\"locality\",\"type\":\"VARCHAR\",\"description\":\"City or locality of the circuit\"},{\"name\":\"country\",\"type\":\"VARCHAR\",\"description\":\"Country of the circuit\"},{\"name\":\"race_date\",\"type\":\"DATE\",\"description\":\"Calendar date of the Grand Prix (local to the circuit)\"},{\"name\":\"race_start_utc\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Scheduled race start in UTC; null when no time is published\"},{\"name\":\"first_practice_utc\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"First practice start in UTC\"},{\"name\":\"second_practice_utc\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Second practice start in UTC\"},{\"name\":\"third_practice_utc\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Third practice start in UTC; null on sprint weekends\"},{\"name\":\"sprint_qualifying_utc\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Sprint qualifying (or sprint shootout) start in UTC\"},{\"name\":\"sprint_utc\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Sprint race start in UTC; null on non-sprint weekends\"},{\"name\":\"qualifying_utc\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Grand Prix qualifying start in UTC\"},{\"name\":\"is_sprint_weekend\",\"type\":\"BOOLEAN\",\"description\":\"Whether the weekend includes a sprint race\"},{\"name\":\"wikipedia_url\",\"type\":\"VARCHAR\",\"description\":\"Wikipedia article for the race\"}]",
+        "vgi.title": "F1 Season Calendar"
+      },
+      null,
+      [
+        "season"
+      ],
+      [
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22616,
+      [
+        "SELECT round, race_name, country, race_date FROM f1.main.schedule(2024) ORDER BY round"
+      ],
+      null,
+      [
+        "formula-1",
+        "schedule"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "session_drivers",
+      null,
+      "table",
+      "Drivers, car numbers, and teams taking part in one OpenF1 session",
+      null,
+      {
+        "provider": "openf1",
+        "vgi.category": "sessions",
+        "vgi.doc_llm": "One row per driver in a session, mapping driver_number to name acronym, full name, and team. Join it to the other session_* functions on driver_number.",
+        "vgi.doc_md": "The session entry list; the join key for OpenF1 timing data is `driver_number`.",
+        "vgi.example_queries": "[{\"description\": \"Entry list for the 2024 Bahrain Grand Prix (session 9472).\", \"sql\": \"SELECT driver_number, name_acronym, full_name, team_name FROM f1.main.session_drivers(9472) ORDER BY driver_number\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"session_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 session key\"},{\"name\":\"meeting_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 meeting (race weekend) key\"},{\"name\":\"driver_number\",\"type\":\"INTEGER\",\"description\":\"Car number of the driver in this session\"},{\"name\":\"name_acronym\",\"type\":\"VARCHAR\",\"description\":\"Three-letter driver acronym, for example VER\"},{\"name\":\"broadcast_name\",\"type\":\"VARCHAR\",\"description\":\"Name as shown on the TV graphics\"},{\"name\":\"full_name\",\"type\":\"VARCHAR\",\"description\":\"Full name as published by OpenF1\"},{\"name\":\"first_name\",\"type\":\"VARCHAR\",\"description\":\"First name\"},{\"name\":\"last_name\",\"type\":\"VARCHAR\",\"description\":\"Last name\"},{\"name\":\"team_name\",\"type\":\"VARCHAR\",\"description\":\"Team name\"},{\"name\":\"team_colour\",\"type\":\"VARCHAR\",\"description\":\"Team colour as a hexadecimal RGB string\"},{\"name\":\"country_code\",\"type\":\"VARCHAR\",\"description\":\"Driver's three-letter country code\"}]",
+        "vgi.title": "F1 Session Entry List (OpenF1)"
+      },
+      null,
+      [
+        "session_key"
+      ],
+      [
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22617,
+      [
+        "SELECT driver_number, name_acronym, full_name, team_name FROM f1.main.session_drivers(9472) ORDER BY driver_number"
+      ],
+      null,
+      [
+        "formula-1",
+        "sessions"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "session_laps",
+      null,
+      "table",
+      "Lap and sector times with speed-trap readings for one OpenF1 session",
+      null,
+      {
+        "provider": "openf1",
+        "vgi.category": "timing",
+        "vgi.doc_llm": "One row per driver per lap with lap and sector durations in seconds, intermediate and speed-trap speeds, and pit-out flags. Requires a session_key; driver_number narrows it to one car. Lap times are null for laps without a valid timing (for example lap 1).",
+        "vgi.doc_md": "Lap and sector timing for one session. Durations are seconds as `DOUBLE`.",
+        "vgi.example_queries": "[{\"description\": \"Fastest race laps in the 2024 Bahrain Grand Prix.\", \"sql\": \"SELECT driver_number, lap_number, lap_duration FROM f1.main.session_laps(9472) WHERE lap_duration IS NOT NULL ORDER BY lap_duration LIMIT 5\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"session_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 session key\"},{\"name\":\"meeting_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 meeting (race weekend) key\"},{\"name\":\"driver_number\",\"type\":\"INTEGER\",\"description\":\"Car number of the driver in this session\"},{\"name\":\"lap_number\",\"type\":\"INTEGER\",\"description\":\"Lap number\"},{\"name\":\"date_start\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Time the lap started, in UTC\"},{\"name\":\"lap_duration\",\"type\":\"DOUBLE\",\"description\":\"Lap time in seconds; null for laps without a valid time\"},{\"name\":\"duration_sector_1\",\"type\":\"DOUBLE\",\"description\":\"Sector 1 time in seconds\"},{\"name\":\"duration_sector_2\",\"type\":\"DOUBLE\",\"description\":\"Sector 2 time in seconds\"},{\"name\":\"duration_sector_3\",\"type\":\"DOUBLE\",\"description\":\"Sector 3 time in seconds\"},{\"name\":\"i1_speed\",\"type\":\"INTEGER\",\"description\":\"Speed at intermediate 1 in km/h\"},{\"name\":\"i2_speed\",\"type\":\"INTEGER\",\"description\":\"Speed at intermediate 2 in km/h\"},{\"name\":\"st_speed\",\"type\":\"INTEGER\",\"description\":\"Speed at the speed trap in km/h\"},{\"name\":\"is_pit_out_lap\",\"type\":\"BOOLEAN\",\"description\":\"Whether the lap began in the pit lane\"}]",
+        "vgi.title": "F1 Session Laps and Sectors (OpenF1)"
+      },
+      null,
+      [
+        "session_key",
+        "driver_number"
+      ],
+      [
+        "INTEGER",
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22618,
+      [
+        "SELECT driver_number, lap_number, lap_duration FROM f1.main.session_laps(9472) WHERE lap_duration IS NOT NULL ORDER BY lap_duration LIMIT 5"
+      ],
+      null,
+      [
+        "formula-1",
+        "timing"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "session_pits",
+      null,
+      "table",
+      "Pit stops with pit-lane and stationary durations for one OpenF1 session",
+      null,
+      {
+        "provider": "openf1",
+        "vgi.category": "timing",
+        "vgi.doc_llm": "One row per pit stop with lap, UTC time, pit-lane duration, and (in newer sessions) stationary stop duration in seconds.",
+        "vgi.doc_md": "Pit stops for one session. `stop_duration` is null where OpenF1 does not publish it.",
+        "vgi.example_queries": "[{\"description\": \"Quickest pit-lane visits in the 2024 Bahrain Grand Prix.\", \"sql\": \"SELECT driver_number, lap_number, lane_duration FROM f1.main.session_pits(9472) ORDER BY lane_duration LIMIT 5\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"session_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 session key\"},{\"name\":\"meeting_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 meeting (race weekend) key\"},{\"name\":\"driver_number\",\"type\":\"INTEGER\",\"description\":\"Car number of the driver in this session\"},{\"name\":\"date\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Time of the pit entry, in UTC\"},{\"name\":\"lap_number\",\"type\":\"INTEGER\",\"description\":\"Lap on which the stop was made\"},{\"name\":\"lane_duration\",\"type\":\"DOUBLE\",\"description\":\"Time spent in the pit lane, in seconds\"},{\"name\":\"stop_duration\",\"type\":\"DOUBLE\",\"description\":\"Stationary time in seconds, where OpenF1 publishes it\"}]",
+        "vgi.title": "F1 Session Pit Stops (OpenF1)"
+      },
+      null,
+      [
+        "session_key"
+      ],
+      [
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22619,
+      [
+        "SELECT driver_number, lap_number, lane_duration FROM f1.main.session_pits(9472) ORDER BY lane_duration LIMIT 5"
+      ],
+      null,
+      [
+        "formula-1",
+        "timing"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "session_result",
+      null,
+      "table",
+      "Final classification of one OpenF1 session: race, sprint, qualifying, or practice",
+      null,
+      {
+        "provider": "openf1",
+        "vgi.category": "results",
+        "vgi.doc_llm": "One row per driver with final position, laps, points, DNF/DNS/DSQ flags, total time, and gap to the leader. For qualifying sessions q1/q2/q3_seconds hold each phase's best lap. Lapped gaps such as '+1 LAP' stay in gap_to_leader with a null numeric gap.",
+        "vgi.doc_md": "Session classification. Numeric gaps are seconds as `DOUBLE`; the published value remains in `gap_to_leader`.",
+        "vgi.example_queries": "[{\"description\": \"Top ten of the 2024 Bahrain Grand Prix with driver names.\", \"sql\": \"SELECT r.position, d.full_name, r.points, r.gap_to_leader FROM f1.main.session_result(9472) r JOIN f1.main.session_drivers(9472) d USING (driver_number) WHERE r.position <= 10 ORDER BY r.position\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"session_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 session key\"},{\"name\":\"meeting_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 meeting (race weekend) key\"},{\"name\":\"position\",\"type\":\"INTEGER\",\"description\":\"Final classified position; null when not classified\"},{\"name\":\"driver_number\",\"type\":\"INTEGER\",\"description\":\"Car number of the driver in this session\"},{\"name\":\"number_of_laps\",\"type\":\"INTEGER\",\"description\":\"Laps completed\"},{\"name\":\"points\",\"type\":\"DECIMAL(7,2)\",\"description\":\"Points scored, for race and sprint sessions\"},{\"name\":\"dnf\",\"type\":\"BOOLEAN\",\"description\":\"Did not finish\"},{\"name\":\"dns\",\"type\":\"BOOLEAN\",\"description\":\"Did not start\"},{\"name\":\"dsq\",\"type\":\"BOOLEAN\",\"description\":\"Disqualified\"},{\"name\":\"duration_seconds\",\"type\":\"DOUBLE\",\"description\":\"Total race time in seconds, or best lap in practice\"},{\"name\":\"gap_to_leader_seconds\",\"type\":\"DOUBLE\",\"description\":\"Gap to the winner in seconds; null when lapped\"},{\"name\":\"gap_to_leader\",\"type\":\"VARCHAR\",\"description\":\"Gap to the winner as published, for example 22.457 or +1 LAP\"},{\"name\":\"q1_seconds\",\"type\":\"DOUBLE\",\"description\":\"Best Q1 time in seconds (qualifying sessions)\"},{\"name\":\"q2_seconds\",\"type\":\"DOUBLE\",\"description\":\"Best Q2 time in seconds (qualifying sessions)\"},{\"name\":\"q3_seconds\",\"type\":\"DOUBLE\",\"description\":\"Best Q3 time in seconds (qualifying sessions)\"}]",
+        "vgi.title": "F1 Session Classification (OpenF1)"
+      },
+      null,
+      [
+        "session_key"
+      ],
+      [
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22620,
+      [
+        "SELECT r.position, d.full_name, r.points, r.gap_to_leader FROM f1.main.session_result(9472) r JOIN f1.main.session_drivers(9472) d USING (driver_number) WHERE r.position <= 10 ORDER BY r.position"
+      ],
+      null,
+      [
+        "formula-1",
+        "results"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "session_stints",
+      null,
+      "table",
+      "Tyre stints (compound, laps, tyre age) for every driver in one OpenF1 session",
+      null,
+      {
+        "provider": "openf1",
+        "vgi.category": "timing",
+        "vgi.doc_llm": "One row per stint per driver with tyre compound, first and last lap, and tyre age at the start. Use it to reconstruct race strategies.",
+        "vgi.doc_md": "Tyre stints for one session; `lap_end - lap_start + 1` is the stint length.",
+        "vgi.example_queries": "[{\"description\": \"Compound usage in the 2024 Bahrain Grand Prix.\", \"sql\": \"SELECT compound, count(*) AS stints, sum(lap_end - lap_start + 1) AS laps FROM f1.main.session_stints(9472) GROUP BY compound ORDER BY laps DESC\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"session_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 session key\"},{\"name\":\"meeting_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 meeting (race weekend) key\"},{\"name\":\"driver_number\",\"type\":\"INTEGER\",\"description\":\"Car number of the driver in this session\"},{\"name\":\"stint_number\",\"type\":\"INTEGER\",\"description\":\"Stint number for this driver, starting at 1\"},{\"name\":\"lap_start\",\"type\":\"INTEGER\",\"description\":\"First lap of the stint\"},{\"name\":\"lap_end\",\"type\":\"INTEGER\",\"description\":\"Last lap of the stint\"},{\"name\":\"compound\",\"type\":\"VARCHAR\",\"description\":\"Tyre compound: SOFT, MEDIUM, HARD, INTERMEDIATE, or WET\"},{\"name\":\"tyre_age_at_start\",\"type\":\"INTEGER\",\"description\":\"Laps already on the tyre set when the stint began\"}]",
+        "vgi.title": "F1 Tyre Stints (OpenF1)"
+      },
+      null,
+      [
+        "session_key"
+      ],
+      [
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22621,
+      [
+        "SELECT compound, count(*) AS stints, sum(lap_end - lap_start + 1) AS laps FROM f1.main.session_stints(9472) GROUP BY compound ORDER BY laps DESC"
+      ],
+      null,
+      [
+        "formula-1",
+        "timing"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "session_weather",
+      null,
+      "table",
+      "Track-side weather samples, about one per minute, for one OpenF1 session",
+      null,
+      {
+        "provider": "openf1",
+        "vgi.category": "sessions",
+        "vgi.doc_llm": "One row per weather sample with air and track temperature, humidity, pressure, rainfall, and wind. Aggregate it for session conditions.",
+        "vgi.doc_md": "Weather samples; temperatures are degrees Celsius and wind speed is metres per second.",
+        "vgi.example_queries": "[{\"description\": \"Track temperature range during the 2024 Bahrain Grand Prix.\", \"sql\": \"SELECT min(track_temperature) AS coolest, max(track_temperature) AS hottest, bool_or(rainfall) AS any_rain FROM f1.main.session_weather(9472)\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"session_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 session key\"},{\"name\":\"meeting_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 meeting (race weekend) key\"},{\"name\":\"date\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Time of the sample, in UTC (roughly one per minute)\"},{\"name\":\"air_temperature\",\"type\":\"DOUBLE\",\"description\":\"Air temperature in degrees Celsius\"},{\"name\":\"track_temperature\",\"type\":\"DOUBLE\",\"description\":\"Track surface temperature in degrees Celsius\"},{\"name\":\"humidity\",\"type\":\"DOUBLE\",\"description\":\"Relative humidity in percent\"},{\"name\":\"pressure\",\"type\":\"DOUBLE\",\"description\":\"Air pressure in millibars\"},{\"name\":\"rainfall\",\"type\":\"BOOLEAN\",\"description\":\"Whether rain was falling\"},{\"name\":\"wind_direction\",\"type\":\"INTEGER\",\"description\":\"Wind direction in degrees (0-359)\"},{\"name\":\"wind_speed\",\"type\":\"DOUBLE\",\"description\":\"Wind speed in metres per second\"}]",
+        "vgi.title": "F1 Session Weather (OpenF1)"
+      },
+      null,
+      [
+        "session_key"
+      ],
+      [
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22622,
+      [
+        "SELECT min(track_temperature) AS coolest, max(track_temperature) AS hottest, bool_or(rainfall) AS any_rain FROM f1.main.session_weather(9472)"
+      ],
+      null,
+      [
+        "formula-1",
+        "sessions"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "sessions",
+      null,
+      "table",
+      "OpenF1 sessions for a season (2023 onwards), optionally filtered by session name",
+      null,
+      {
+        "provider": "openf1",
+        "vgi.category": "sessions",
+        "vgi.doc_llm": "One row per practice, qualifying, sprint, or race session from 2023, with the session_key every session_* function takes. Filter with session_name := 'Race'. To find one race, filter by country_name or location and date_start.",
+        "vgi.doc_md": "OpenF1 sessions. Look up `session_key` here, then pass it to `session_result()`, `session_laps()`, `session_stints()`, `session_pits()`, `session_weather()`, `race_control()`, `team_radio()`, or `session_drivers()`.",
+        "vgi.example_queries": "[{\"description\": \"Session keys for every 2024 race.\", \"sql\": \"SELECT session_key, country_name, location, date_start FROM f1.main.sessions(2024, session_name := 'Race') ORDER BY date_start\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"session_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 session key; pass it to the session_* functions\"},{\"name\":\"meeting_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 meeting (race weekend) key\"},{\"name\":\"session_name\",\"type\":\"VARCHAR\",\"description\":\"Session name, for example Race, Qualifying, Sprint, Practice 1\"},{\"name\":\"session_type\",\"type\":\"VARCHAR\",\"description\":\"Session type, for example Race, Qualifying, Practice\"},{\"name\":\"year\",\"type\":\"INTEGER\",\"description\":\"Season year\"},{\"name\":\"location\",\"type\":\"VARCHAR\",\"description\":\"Session location\"},{\"name\":\"country_code\",\"type\":\"VARCHAR\",\"description\":\"Three-letter country code\"},{\"name\":\"country_name\",\"type\":\"VARCHAR\",\"description\":\"Country name\"},{\"name\":\"circuit_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 circuit key\"},{\"name\":\"circuit_short_name\",\"type\":\"VARCHAR\",\"description\":\"Short circuit name\"},{\"name\":\"date_start\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Session start in UTC\"},{\"name\":\"date_end\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Session end in UTC\"},{\"name\":\"gmt_offset\",\"type\":\"VARCHAR\",\"description\":\"Local UTC offset of the venue\"},{\"name\":\"is_cancelled\",\"type\":\"BOOLEAN\",\"description\":\"Whether the session was cancelled\"}]",
+        "vgi.title": "F1 Sessions (OpenF1)"
+      },
+      null,
+      [
+        "season",
+        "session_name"
+      ],
+      [
+        "INTEGER",
+        "VARCHAR"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22623,
+      [
+        "SELECT session_key, country_name, location, date_start FROM f1.main.sessions(2024, session_name := 'Race') ORDER BY date_start"
+      ],
+      null,
+      [
+        "formula-1",
+        "sessions"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "sprint_results",
+      null,
+      "table",
+      "Sprint race classifications for a season (2021 onwards), or for one round",
+      null,
+      {
+        "provider": "jolpica-f1",
+        "vgi.category": "results",
+        "vgi.doc_llm": "One row per driver per sprint race, with the same columns as race_results(). Sprints began in 2021; non-sprint rounds return no rows.",
+        "vgi.doc_md": "Sprint race results with the same shape as `race_results()`.",
+        "vgi.example_queries": "[{\"description\": \"Sprint winners in 2024.\", \"sql\": \"SELECT round, race_name, driver_name FROM f1.main.sprint_results(2024) WHERE position = 1 ORDER BY round\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"season\",\"type\":\"INTEGER\",\"description\":\"Championship season year\"},{\"name\":\"round\",\"type\":\"INTEGER\",\"description\":\"Round number within the season (1 = first race)\"},{\"name\":\"race_name\",\"type\":\"VARCHAR\",\"description\":\"Grand Prix name, for example Bahrain Grand Prix\"},{\"name\":\"race_date\",\"type\":\"DATE\",\"description\":\"Calendar date of the Grand Prix (local to the circuit)\"},{\"name\":\"circuit_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast circuit identifier\"},{\"name\":\"circuit_name\",\"type\":\"VARCHAR\",\"description\":\"Full circuit name, for example Autodromo Nazionale di Monza\"},{\"name\":\"country\",\"type\":\"VARCHAR\",\"description\":\"Country of the circuit\"},{\"name\":\"position\",\"type\":\"INTEGER\",\"description\":\"Finishing position (classification order, including retirements)\"},{\"name\":\"position_text\",\"type\":\"VARCHAR\",\"description\":\"Published classification: a number, or R retired, D disqualified, E excluded, W withdrawn, F failed to qualify, N not classified\"},{\"name\":\"classified\",\"type\":\"BOOLEAN\",\"description\":\"Whether position_text is numeric, i.e. the driver was classified\"},{\"name\":\"points\",\"type\":\"DECIMAL(7,2)\",\"description\":\"Championship points scored in this race\"},{\"name\":\"car_number\",\"type\":\"INTEGER\",\"description\":\"Race number displayed on the car (not a position)\"},{\"name\":\"driver_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast driver identifier, for example hamilton\"},{\"name\":\"driver_code\",\"type\":\"VARCHAR\",\"description\":\"Three-letter driver code, for example HAM\"},{\"name\":\"driver_name\",\"type\":\"VARCHAR\",\"description\":\"Driver's full name\"},{\"name\":\"driver_nationality\",\"type\":\"VARCHAR\",\"description\":\"Nationality of the driver as a demonym, for example British\"},{\"name\":\"constructor_id\",\"type\":\"VARCHAR\",\"description\":\"Stable Jolpica/Ergast constructor identifier\"},{\"name\":\"constructor_name\",\"type\":\"VARCHAR\",\"description\":\"Constructor (team) name\"},{\"name\":\"grid\",\"type\":\"INTEGER\",\"description\":\"Starting grid position (1 = pole); 0 means a pit-lane start\"},{\"name\":\"laps\",\"type\":\"INTEGER\",\"description\":\"Number of laps completed\"},{\"name\":\"status\",\"type\":\"VARCHAR\",\"description\":\"Finishing status, for example Finished, +1 Lap, or Engine\"},{\"name\":\"race_time_millis\",\"type\":\"BIGINT\",\"description\":\"Elapsed race time in milliseconds as published; usually null for lapped or retired cars, but the archive also records it for some of them\"},{\"name\":\"race_time\",\"type\":\"VARCHAR\",\"description\":\"Published race time: absolute for the winner, a gap such as +5.123 for others; null when none is published\"},{\"name\":\"fastest_lap_rank\",\"type\":\"INTEGER\",\"description\":\"Rank of this driver's fastest lap among all drivers (1 = fastest)\"},{\"name\":\"fastest_lap_number\",\"type\":\"INTEGER\",\"description\":\"Lap number on which the driver set their fastest lap\"},{\"name\":\"fastest_lap_time\",\"type\":\"VARCHAR\",\"description\":\"Fastest lap time as published, for example 1:32.608\"},{\"name\":\"fastest_lap_seconds\",\"type\":\"DECIMAL(10,3)\",\"description\":\"Fastest lap time in seconds as an exact decimal\"},{\"name\":\"fastest_lap_avg_speed_kph\",\"type\":\"DOUBLE\",\"description\":\"Average speed of the fastest lap in km/h; null where the archive does not publish it (sprints and races from 2025 onwards)\"}]",
+        "vgi.title": "F1 Sprint Results"
+      },
+      null,
+      [
+        "season",
+        "round"
+      ],
+      [
+        "INTEGER",
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22624,
+      [
+        "SELECT round, race_name, driver_name FROM f1.main.sprint_results(2024) WHERE position = 1 ORDER BY round"
+      ],
+      null,
+      [
+        "formula-1",
+        "results"
+      ]
+    ],
+    [
+      "f1",
+      "22595",
+      "main",
+      "team_radio",
+      null,
+      "table",
+      "Links to broadcast team radio clips for one OpenF1 session",
+      null,
+      {
+        "provider": "openf1",
+        "vgi.category": "sessions",
+        "vgi.doc_llm": "One row per broadcast team radio clip with UTC time, driver number, and a link to the official audio. Only clips that were broadcast are included; audio is not rehosted.",
+        "vgi.doc_md": "Team radio clip links. Audio stays on Formula 1's servers.",
+        "vgi.example_queries": "[{\"description\": \"Radio clips per driver in the 2024 Bahrain Grand Prix.\", \"sql\": \"SELECT driver_number, count(*) AS clips FROM f1.main.team_radio(9472) GROUP BY driver_number ORDER BY clips DESC\"}]",
+        "vgi.result_columns_schema": "[{\"name\":\"session_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 session key\"},{\"name\":\"meeting_key\",\"type\":\"INTEGER\",\"description\":\"OpenF1 meeting (race weekend) key\"},{\"name\":\"driver_number\",\"type\":\"INTEGER\",\"description\":\"Car number of the driver in this session\"},{\"name\":\"date\",\"type\":\"TIMESTAMP WITH TIME ZONE\",\"description\":\"Time of the radio message, in UTC\"},{\"name\":\"recording_url\",\"type\":\"VARCHAR\",\"description\":\"Link to the official audio clip on Formula 1 live timing\"}]",
+        "vgi.title": "F1 Team Radio Clips (OpenF1)"
+      },
+      null,
+      [
+        "session_key",
+        "driver_number"
+      ],
+      [
+        "INTEGER",
+        "INTEGER"
+      ],
+      null,
+      null,
+      null,
+      true,
+      null,
+      22625,
+      [
+        "SELECT driver_number, count(*) AS clips FROM f1.main.team_radio(9472) GROUP BY driver_number ORDER BY clips DESC"
+      ],
+      null,
+      [
+        "formula-1",
+        "sessions"
+      ]
+    ]
+  ]
+}

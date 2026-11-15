@@ -1,0 +1,216 @@
+diff --git a/vgi_f1/ergast.py b/vgi_f1/ergast.py
+index 7597c0c..e5c88de 100644
+--- a/vgi_f1/ergast.py
++++ b/vgi_f1/ergast.py
+@@ -10,6 +10,7 @@ import pyarrow as pa
+ from vgi.arguments import Arg
+ 
+ from vgi_f1 import api
++from vgi_f1.examples import SPRINT_VS_GRAND_PRIX_WINNERS, STINT_PACE
+ from vgi_f1.functions import Example, Paged, table_function
+ from vgi_f1.schemas import (
+     CIRCUITS_SCHEMA,
+@@ -411,7 +412,8 @@ SprintResultsFunction = table_function(
+             "Sprint winners in 2024.",
+             "SELECT round, race_name, driver_name FROM f1.main.sprint_results(2024) "
+             "WHERE position = 1 ORDER BY round",
+-        )
++        ),
++        SPRINT_VS_GRAND_PRIX_WINNERS,
+     ],
+     estimate=120,
+     maximum=200,
+@@ -475,7 +477,8 @@ LapTimesFunction = table_function(
+             "Max Verstappen's laps in the 2024 Chinese Grand Prix.",
+             "SELECT lap, position, lap_time FROM f1.main.lap_times(2024, 5, driver_id := 'max_verstappen') "
+             "ORDER BY lap",
+-        )
++        ),
++        STINT_PACE,
+     ],
+     estimate=1_100,
+     maximum=2_000,
+diff --git a/vgi_f1/examples.py b/vgi_f1/examples.py
+new file mode 100644
+index 0000000..26baef6
+--- /dev/null
++++ b/vgi_f1/examples.py
+@@ -0,0 +1,60 @@
++"""Example queries that combine several catalog objects.
++
++Each query is defined once here and listed both on the object that drives it and
++in the schema-level ``vgi.example_queries``.
++"""
++
++from __future__ import annotations
++
++from vgi_f1.functions import Example
++
++SPRINT_VS_GRAND_PRIX_WINNERS = Example(
++    "Sprint winner against Grand Prix winner on every 2024 sprint weekend.",
++    "WITH sp AS (SELECT round, race_name, driver_name AS sprint_winner "
++    "FROM f1.main.sprint_results(2024) WHERE position = 1), "
++    "gp AS (SELECT round, driver_name AS grand_prix_winner "
++    "FROM f1.main.race_results(2024) WHERE position = 1) "
++    "SELECT round, race_name, sprint_winner, grand_prix_winner, "
++    "sprint_winner = grand_prix_winner AS won_both "
++    "FROM sp JOIN gp USING (round) ORDER BY round",
++)
++
++STINT_PACE = Example(
++    "Max Verstappen's pace per stint in the 2024 Chinese Grand Prix, splitting his laps at "
++    "each pit stop and leaving out in- and out-laps.",
++    "WITH stops AS (SELECT lap FROM f1.main.pit_stops(2024, 5) WHERE driver_id = 'max_verstappen'), "
++    "laps AS (SELECT l.lap, l.lap_time_seconds, "
++    "1 + (SELECT count(*) FROM stops WHERE stops.lap < l.lap) AS stint "
++    "FROM f1.main.lap_times(2024, 5, driver_id := 'max_verstappen') l) "
++    "SELECT stint, min(lap) AS first_lap, max(lap) AS last_lap, "
++    "min(lap_time_seconds) AS best_lap_seconds, median(lap_time_seconds) AS median_lap_seconds "
++    "FROM laps WHERE lap NOT IN (SELECT lap FROM stops) AND lap NOT IN (SELECT lap + 1 FROM stops) "
++    "GROUP BY stint ORDER BY stint",
++)
++
++TYRE_STRATEGY_BY_FINISH = Example(
++    "Every driver's tyre sequence in the 2024 Bahrain Grand Prix (session 9472), in finishing order.",
++    "SELECT r.position, d.name_acronym, d.team_name, count(*) AS stints, "
++    "string_agg(st.compound, ' > ' ORDER BY st.stint_number) AS strategy "
++    "FROM f1.main.session_stints(9472) st "
++    "JOIN f1.main.session_drivers(9472) d USING (driver_number) "
++    "JOIN f1.main.session_result(9472) r USING (driver_number) "
++    "GROUP BY r.position, d.name_acronym, d.team_name "
++    "ORDER BY r.position NULLS LAST, d.name_acronym",
++)
++
++STANDINGS_WITH_LAST_RACE = Example(
++    "Championship top ten with each driver's finish and points in the latest Grand Prix.",
++    "SELECT s.position, s.driver_name, s.points, r.position AS last_race_finish, "
++    "coalesce(r.points, 0) AS last_race_points "
++    "FROM f1.main.current_driver_standings s "
++    "LEFT JOIN f1.main.last_race_results r USING (driver_id) "
++    "ORDER BY s.position LIMIT 10",
++)
++
++COMPOSED_EXAMPLES = (
++    STANDINGS_WITH_LAST_RACE,
++    SPRINT_VS_GRAND_PRIX_WINNERS,
++    STINT_PACE,
++    TYRE_STRATEGY_BY_FINISH,
++)
+diff --git a/vgi_f1/openf1.py b/vgi_f1/openf1.py
+index ebc19ae..446f129 100644
+--- a/vgi_f1/openf1.py
++++ b/vgi_f1/openf1.py
+@@ -10,6 +10,7 @@ import pyarrow as pa
+ from vgi.arguments import Arg
+ 
+ from vgi_f1 import api
++from vgi_f1.examples import TYRE_STRATEGY_BY_FINISH
+ from vgi_f1.functions import Example, Fetched, table_function
+ from vgi_f1.schemas import (
+     MEETINGS_SCHEMA,
+@@ -288,7 +289,8 @@ SessionStintsFunction = table_function(
+             "Compound usage in the 2024 Bahrain Grand Prix.",
+             "SELECT compound, count(*) AS stints, sum(lap_end - lap_start + 1) AS laps "
+             "FROM f1.main.session_stints(9472) GROUP BY compound ORDER BY laps DESC",
+-        )
++        ),
++        TYRE_STRATEGY_BY_FINISH,
+     ],
+     estimate=60,
+     maximum=200,
+diff --git a/vgi_f1/worker.py b/vgi_f1/worker.py
+index 34db4f6..fe65a88 100644
+--- a/vgi_f1/worker.py
++++ b/vgi_f1/worker.py
+@@ -19,6 +19,8 @@ from vgi_f1.ergast import (
+     LastRaceResultsFunction,
+     SeasonsFunction,
+ )
++from vgi_f1.examples import COMPOSED_EXAMPLES, STANDINGS_WITH_LAST_RACE
++from vgi_f1.functions import Example
+ from vgi_f1.meta import column_comments
+ from vgi_f1.openf1 import FUNCTIONS as OPENF1_FUNCTIONS
+ from vgi_f1.schemas import (
+@@ -32,10 +34,26 @@ from vgi_f1.schemas import (
+ SOURCE_URL = "https://github.com/Query-farm/vgi-f1"
+ 
+ 
+-def _examples(*pairs: tuple[str, str]) -> str:
++def _examples(*examples: tuple[str, str] | Example) -> str:
++    pairs = [(e.description, e.sql) if isinstance(e, Example) else e for e in examples]
+     return json.dumps([{"description": description, "sql": sql} for description, sql in pairs])
+ 
+ 
++_DRIVER_STANDINGS_EXAMPLES: tuple[tuple[str, str] | Example, ...] = (
++    (
++        "The current championship top ten.",
++        "SELECT position, driver_name, constructor_name, points, wins "
++        "FROM f1.main.current_driver_standings ORDER BY position LIMIT 10",
++    ),
++    (
++        "Points gap from each driver to the leader.",
++        "SELECT driver_name, points, max(points) OVER () - points AS gap_to_leader "
++        "FROM f1.main.current_driver_standings ORDER BY position",
++    ),
++    STANDINGS_WITH_LAST_RACE,
++)
++
++
+ _DRIVER_STANDINGS_TAGS = {
+     "provider": "jolpica-f1",
+     "vgi.category": "standings",
+@@ -50,18 +68,7 @@ _DRIVER_STANDINGS_TAGS = {
+         "The current Formula 1 drivers' championship as an ordinary read-only table, refreshed "
+         "from Jolpica-F1 at most every ten minutes. Points are exact decimals."
+     ),
+-    "vgi.example_queries": _examples(
+-        (
+-            "The current championship top ten.",
+-            "SELECT position, driver_name, constructor_name, points, wins "
+-            "FROM f1.main.current_driver_standings ORDER BY position LIMIT 10",
+-        ),
+-        (
+-            "Points gap from each driver to the leader.",
+-            "SELECT driver_name, points, max(points) OVER () - points AS gap_to_leader "
+-            "FROM f1.main.current_driver_standings ORDER BY position",
+-        ),
+-    ),
++    "vgi.example_queries": _examples(*_DRIVER_STANDINGS_EXAMPLES),
+ }
+ 
+ _CONSTRUCTOR_STANDINGS_TAGS = {
+@@ -247,6 +254,22 @@ _AGENT_TEST_TASKS = json.dumps(
+                 "the number of team radio clips."
+             ),
+         },
++        {
++            "name": "china_2024_podium_pit_stops",
++            "prompt": (
++                "For the 2024 Chinese Grand Prix (round 5), list the three podium finishers in "
++                "finishing order with their finishing position, driver name, number of pit stops, "
++                "and total pit-lane time in seconds."
++            ),
++        },
++        {
++            "name": "bahrain_2024_least_pit_lane_time_team",
++            "prompt": (
++                "In the 2024 Bahrain Grand Prix race, which team spent the least combined time in "
++                "the pit lane across both of its cars? Return one row: the team name, the team's "
++                "total number of pit stops, and the best finishing position of its drivers."
++            ),
++        },
+     ]
+ )
+ 
+@@ -401,7 +424,10 @@ F1_CATALOG = Catalog(
+                     "functions take `season` (and optionally `round`); OpenF1 session functions "
+                     "take a `session_key` found with `sessions()`."
+                 ),
+-                "vgi.example_queries": _DRIVER_STANDINGS_TAGS["vgi.example_queries"],
++                "vgi.example_queries": _examples(
++                    *(e for e in _DRIVER_STANDINGS_EXAMPLES if e not in COMPOSED_EXAMPLES),
++                    *COMPOSED_EXAMPLES,
++                ),
+             },
+             functions=[*ERGAST_FUNCTIONS, *OPENF1_FUNCTIONS],
+             tables=[

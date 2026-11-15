@@ -1,0 +1,353 @@
+{
+  "schema_version": 1,
+  "repository": "Query-farm/vgi-f1",
+  "revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+  "captured_at": "2026-11-15T00:49:33.562635+00:00",
+  "default_schema": "main",
+  "scope": "all_public_functions_and_tables",
+  "complete": true,
+  "objects": [
+    {
+      "schema": "main",
+      "name": "all_current_constructor_standings",
+      "kind": "function",
+      "signatures": [
+        "table() -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "all_current_driver_standings",
+      "kind": "function",
+      "signatures": [
+        "table() -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "all_current_schedule",
+      "kind": "function",
+      "signatures": [
+        "table() -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "all_last_race_results",
+      "kind": "function",
+      "signatures": [
+        "table() -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "all_seasons",
+      "kind": "function",
+      "signatures": [
+        "table() -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "circuits",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "constructor_standings",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER, INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "constructors",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "driver_results",
+      "kind": "function",
+      "signatures": [
+        "table(VARCHAR, INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "driver_standings",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER, INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "drivers",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "lap_times",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER, INTEGER, VARCHAR) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "meetings",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "pit_stops",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER, INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "qualifying_results",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER, INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "race_control",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "race_results",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER, INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "schedule",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "session_drivers",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "session_laps",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER, INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "session_pits",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "session_result",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "session_stints",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "session_weather",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "sessions",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER, VARCHAR) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "sprint_results",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER, INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "team_radio",
+      "kind": "function",
+      "signatures": [
+        "table(INTEGER, INTEGER) -> None"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "seasons",
+      "kind": "table",
+      "signatures": [
+        "TABLE"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "last_race_results",
+      "kind": "table",
+      "signatures": [
+        "TABLE"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "current_schedule",
+      "kind": "table",
+      "signatures": [
+        "TABLE"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "current_constructor_standings",
+      "kind": "table",
+      "signatures": [
+        "TABLE"
+      ],
+      "authentication": "none",
+      "access": "read"
+    },
+    {
+      "schema": "main",
+      "name": "current_driver_standings",
+      "kind": "table",
+      "signatures": [
+        "TABLE"
+      ],
+      "authentication": "none",
+      "access": "read"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "coverage/functions.json",
+      "sha256": "e90de150bd42cfc96bbfbf3c69265ad31fa5f92120f766462b2633e46753942b",
+      "description": "Complete actual public v0.2.0 Git-tag runtime export; all functions, physical tables and views included"
+    },
+    {
+      "path": "coverage/tables.json",
+      "sha256": "59ed7c783f460ed3a5893956f79e6d1640d4d0012482ed1eba408d145e58117d",
+      "description": "Complete actual public v0.2.0 Git-tag runtime export; all functions, physical tables and views included"
+    },
+    {
+      "path": "coverage/views.json",
+      "sha256": "f46de19c580b9c1503750d3eabe8bce94e3f940d6916ecd97a5ea67b7d844f55",
+      "description": "Complete actual public v0.2.0 Git-tag runtime export; all functions, physical tables and views included"
+    },
+    {
+      "path": "coverage/catalog-metadata.json",
+      "sha256": "2dec625bd8195e2256b529b23a002a80a1cd245df660d202c080a1881d25e907",
+      "description": "Complete actual public v0.2.0 Git-tag runtime export; all functions, physical tables and views included"
+    }
+  ]
+}

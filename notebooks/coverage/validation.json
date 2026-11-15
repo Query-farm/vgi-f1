@@ -1,0 +1,1903 @@
+{
+  "schema_version": 1,
+  "status": "met",
+  "meets_target": true,
+  "catalogs": {
+    "released": {
+      "catalog_status": "verified",
+      "revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149",
+      "collection_reconciled": true,
+      "denominator": 32,
+      "observed_objects": 32,
+      "required": 16,
+      "verified_count": 17,
+      "candidate_count": 0,
+      "fraction": 0.53125,
+      "meets_target": true,
+      "exact_runtime_count": 17,
+      "runtime_revisions": [
+        "dae778b4965cc878ff00315834976d6c66d2bdff"
+      ],
+      "covered": [
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "circuits"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "constructors"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "drivers"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "lap_times"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "meetings"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "pit_stops"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "qualifying_results"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "race_results"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "schedule"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_drivers"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_laps"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_pits"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_result"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_stints"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_weather"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "sessions"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "sprint_results"
+        }
+      ],
+      "uncovered": [
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_current_constructor_standings"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_current_driver_standings"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_current_schedule"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_last_race_results"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_seasons"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "constructor_standings"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "current_constructor_standings"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "current_driver_standings"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "current_schedule"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "driver_results"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "driver_standings"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "last_race_results"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "race_control"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "seasons"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "team_radio"
+        }
+      ],
+      "objects": [
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_current_constructor_standings",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table() -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_current_driver_standings",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table() -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_current_schedule",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table() -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_last_race_results",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table() -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_seasons",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table() -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "circuits",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "constructor_standings",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "constructors",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "current_constructor_standings",
+          "kinds": [
+            "table"
+          ],
+          "signatures": [
+            "TABLE"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "current_driver_standings",
+          "kinds": [
+            "table"
+          ],
+          "signatures": [
+            "TABLE"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "current_schedule",
+          "kinds": [
+            "table"
+          ],
+          "signatures": [
+            "TABLE"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "driver_results",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(VARCHAR, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "driver_standings",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "drivers",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "lap_times",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER, VARCHAR) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "last_race_results",
+          "kinds": [
+            "table"
+          ],
+          "signatures": [
+            "TABLE"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "meetings",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "pit_stops",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "qualifying_results",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "race_control",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "race_results",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "schedule",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "seasons",
+          "kinds": [
+            "table"
+          ],
+          "signatures": [
+            "TABLE"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_drivers",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_laps",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_pits",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_result",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_stints",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_weather",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "sessions",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, VARCHAR) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "sprint_results",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "team_radio",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        }
+      ],
+      "issues": []
+    },
+    "current": {
+      "catalog_status": "verified",
+      "revision": "a4470419e4cb3c5c1b521b47bd6ad76680da44f6",
+      "catalog_sha256": "928eb7826814e4847049bf99f68a132d70fab28b76095d978585f6083ad16f23",
+      "collection_reconciled": false,
+      "denominator": 32,
+      "observed_objects": 32,
+      "required": 16,
+      "verified_count": 17,
+      "candidate_count": 0,
+      "fraction": 0.53125,
+      "meets_target": true,
+      "exact_runtime_count": 0,
+      "runtime_revisions": [
+        "dae778b4965cc878ff00315834976d6c66d2bdff"
+      ],
+      "covered": [
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "circuits"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "constructors"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "drivers"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "lap_times"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "meetings"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "pit_stops"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "qualifying_results"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "race_results"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "schedule"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_drivers"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_laps"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_pits"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_result"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_stints"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_weather"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "sessions"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "sprint_results"
+        }
+      ],
+      "uncovered": [
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_current_constructor_standings"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_current_driver_standings"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_current_schedule"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_last_race_results"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_seasons"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "constructor_standings"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "current_constructor_standings"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "current_driver_standings"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "current_schedule"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "driver_results"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "driver_standings"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "last_race_results"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "race_control"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "seasons"
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "team_radio"
+        }
+      ],
+      "objects": [
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_current_constructor_standings",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table() -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_current_driver_standings",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table() -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_current_schedule",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table() -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_last_race_results",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table() -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "all_seasons",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table() -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "circuits",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "constructor_standings",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "constructors",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "current_constructor_standings",
+          "kinds": [
+            "table"
+          ],
+          "signatures": [
+            "TABLE"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "current_driver_standings",
+          "kinds": [
+            "table"
+          ],
+          "signatures": [
+            "TABLE"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "current_schedule",
+          "kinds": [
+            "table"
+          ],
+          "signatures": [
+            "TABLE"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "driver_results",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(VARCHAR, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "driver_standings",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "drivers",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "lap_times",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER, VARCHAR) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "last_race_results",
+          "kinds": [
+            "table"
+          ],
+          "signatures": [
+            "TABLE"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "meetings",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "pit_stops",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "qualifying_results",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "race_control",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "race_results",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "schedule",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "seasons",
+          "kinds": [
+            "table"
+          ],
+          "signatures": [
+            "TABLE"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_drivers",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_laps",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_pits",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_result",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_stints",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "session_weather",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "sessions",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, VARCHAR) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "sprint_results",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        },
+        {
+          "schema": [
+            "main"
+          ],
+          "name": "team_radio",
+          "kinds": [
+            "function"
+          ],
+          "signatures": [
+            "table(INTEGER, INTEGER) -> None"
+          ],
+          "access": [
+            "read"
+          ],
+          "authentication": [
+            "none"
+          ]
+        }
+      ],
+      "issues": []
+    }
+  },
+  "interface_drift": {
+    "known": true,
+    "current_only": [],
+    "released_only": [],
+    "changed": []
+  },
+  "notebooks": {
+    "01_pit_lap_filters_change_stint_summaries.ipynb": {
+      "verified": true,
+      "issues": []
+    },
+    "02_a_weekend_has_separate_classifications.ipynb": {
+      "verified": true,
+      "issues": []
+    },
+    "03_weather_context_needs_a_time_tolerance.ipynb": {
+      "verified": true,
+      "issues": []
+    }
+  },
+  "examples": [
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "lap_times"
+      },
+      "notebook": "01_pit_lap_filters_change_stint_summaries.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    },
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "pit_stops"
+      },
+      "notebook": "01_pit_lap_filters_change_stint_summaries.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    },
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "schedule"
+      },
+      "notebook": "02_a_weekend_has_separate_classifications.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    },
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "circuits"
+      },
+      "notebook": "02_a_weekend_has_separate_classifications.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    },
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "drivers"
+      },
+      "notebook": "02_a_weekend_has_separate_classifications.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    },
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "constructors"
+      },
+      "notebook": "02_a_weekend_has_separate_classifications.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    },
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "qualifying_results"
+      },
+      "notebook": "02_a_weekend_has_separate_classifications.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    },
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "race_results"
+      },
+      "notebook": "02_a_weekend_has_separate_classifications.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    },
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "sprint_results"
+      },
+      "notebook": "02_a_weekend_has_separate_classifications.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    },
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "meetings"
+      },
+      "notebook": "03_weather_context_needs_a_time_tolerance.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    },
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "sessions"
+      },
+      "notebook": "03_weather_context_needs_a_time_tolerance.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    },
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "session_drivers"
+      },
+      "notebook": "03_weather_context_needs_a_time_tolerance.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    },
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "session_result"
+      },
+      "notebook": "03_weather_context_needs_a_time_tolerance.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    },
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "session_laps"
+      },
+      "notebook": "03_weather_context_needs_a_time_tolerance.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    },
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "session_stints"
+      },
+      "notebook": "03_weather_context_needs_a_time_tolerance.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    },
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "session_pits"
+      },
+      "notebook": "03_weather_context_needs_a_time_tolerance.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    },
+    {
+      "status": "verified",
+      "issues": [],
+      "verified_catalogs": [
+        "released",
+        "current"
+      ],
+      "object": {
+        "schema": [
+          "main"
+        ],
+        "name": "session_weather"
+      },
+      "notebook": "03_weather_context_needs_a_time_tolerance.ipynb",
+      "runtime_revision": "dae778b4965cc878ff00315834976d6c66d2bdff",
+      "runtime_catalog_sha256": "020bdc51c77336cc174dcfe24237e78271b83ad6eba69eb68ce14fbdb25d5149"
+    }
+  ],
+  "issues": []
+}
