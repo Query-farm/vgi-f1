@@ -351,7 +351,14 @@ F1_CATALOG = Catalog(
             "## Licence\n\n"
             "Both sources publish their data under CC BY-NC-SA 4.0: attribute them, do not use the "
             "data commercially, and share derived datasets alike. This worker fetches on demand "
-            "and does not rehost data. It is not affiliated with Formula 1 or the FIA."
+            "and does not rehost data. It is not affiliated with Formula 1 or the FIA.\n\n"
+            "## Sources and references\n\n"
+            "* [Jolpica-F1](https://jolpi.ca/): the Ergast-compatible API behind calendars, results, "
+            "standings, and laps ([API docs](https://github.com/jolpica/jolpica-f1/tree/main/docs)).\n"
+            "* [OpenF1](https://openf1.org/): 2023+ session timing, stints, weather, and race control "
+            "([API docs](https://openf1.org/docs/)).\n"
+            "* [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/): the licence both "
+            "sources publish under."
         ),
     },
     schemas=[
