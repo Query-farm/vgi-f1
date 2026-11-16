@@ -187,7 +187,7 @@ def _retry_delay(response: httpx.Response | None, attempt: int) -> float:
                     if retry_at.tzinfo is None:
                         retry_at = retry_at.replace(tzinfo=UTC)
                     delay = (retry_at - datetime.now(UTC)).total_seconds()
-                except (TypeError, ValueError, OverflowError):
+                except TypeError, ValueError, OverflowError:
                     delay = -1.0
             if delay >= 0:
                 return min(delay, MAX_RETRY_DELAY)
@@ -390,7 +390,7 @@ def fetch_jolpica_page(
     try:
         total = int(data.get("total", 0))
         limit = int(data.get("limit", JOLPICA_PAGE_SIZE))
-    except (TypeError, ValueError):
+    except TypeError, ValueError:
         total, limit = 0, JOLPICA_PAGE_SIZE
     following = offset + limit
     return JolpicaPage(

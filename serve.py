@@ -1,5 +1,5 @@
 # /// script
-# requires-python = ">=3.13"
+# requires-python = ">=3.14"
 # dependencies = ["vgi-python[http]>=0.52.2,<0.53", "httpx>=0.27,<1", "pyarrow>=18,<26"]
 # ///
 """HTTP entry point for the F1 VGI worker."""
