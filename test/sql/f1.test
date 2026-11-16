@@ -1,0 +1,49 @@
+# name: test/sql/f1.test
+# description: Hermetic end-to-end coverage: every current table, the backing scans and every
+#   composed example (vgi_f1.examples.COMPOSED_EXAMPLES, copied verbatim; a unit test keeps them
+#   in sync), served from the recorded fixtures by test/mock_api/server.py.
+# group: [f1]
+
+require vgi
+
+require-env VGI_F1_WORKER
+
+require-env F1_JOLPICA_BASE_URL
+
+statement ok
+ATTACH 'f1' (TYPE vgi, LOCATION '{VGI_F1_WORKER}');
+
+query IIIIITIIII
+SELECT (SELECT count(*) FROM f1.main.current_driver_standings) AS drivers, (SELECT count(*) FROM f1.main.current_constructor_standings) AS constructors, (SELECT count(*) FROM f1.main.current_schedule) AS rounds, (SELECT count(*) FROM f1.main.last_race_results) AS results, (SELECT count(*) FROM f1.main.seasons) AS seasons, (SELECT driver_name FROM f1.main.current_driver_standings WHERE position = 1) AS leader, (SELECT count(*) FROM f1.main.race_results(2024) WHERE position = 1) AS winners, (SELECT count(*) FROM f1.main.lap_times(2024, 5, driver_id := 'max_verstappen')) AS laps, (SELECT max(points) FROM f1.main.session_result(9472)) AS top_points, (SELECT count(*) FROM f1.main.session_stints(1)) AS missing_session;
+----
+5	4	3	5	3	Andrea Kimi Antonelli	2	6	26.00	0
+
+# Composed examples. The trimmed fixtures only partly overlap (the 2024 sprint and results
+# fixtures share no round; the 9472 stints and result fixtures share no car), so those two
+# examples bind and run but return no rows; the others return real rows.
+
+# STANDINGS_WITH_LAST_RACE
+query ITIII
+SELECT s.position, s.driver_name, s.points, r.position AS last_race_finish, coalesce(r.points, 0) AS last_race_points FROM f1.main.current_driver_standings s LEFT JOIN f1.main.last_race_results r USING (driver_id) ORDER BY s.position LIMIT 10;
+----
+1	Andrea Kimi Antonelli	390.00	5	10.00
+2	Max Verstappen	279.00	2	18.00
+3	George Russell	262.00	4	12.00
+4	Lewis Hamilton	261.00	NULL	0.00
+5	Charles Leclerc	249.00	NULL	0.00
+
+# SPRINT_VS_GRAND_PRIX_WINNERS
+query ITTTI
+WITH sp AS (SELECT round, race_name, driver_name AS sprint_winner FROM f1.main.sprint_results(2024) WHERE position = 1), gp AS (SELECT round, driver_name AS grand_prix_winner FROM f1.main.race_results(2024) WHERE position = 1) SELECT round, race_name, sprint_winner, grand_prix_winner, sprint_winner = grand_prix_winner AS won_both FROM sp JOIN gp USING (round) ORDER BY round;
+----
+
+# STINT_PACE
+query IIIRR
+WITH stops AS (SELECT lap FROM f1.main.pit_stops(2024, 5) WHERE driver_id = 'max_verstappen'), laps AS (SELECT l.lap, l.lap_time_seconds, 1 + (SELECT count(*) FROM stops WHERE stops.lap < l.lap) AS stint FROM f1.main.lap_times(2024, 5, driver_id := 'max_verstappen') l) SELECT stint, min(lap) AS first_lap, max(lap) AS last_lap, min(lap_time_seconds) AS best_lap_seconds, median(lap_time_seconds) AS median_lap_seconds FROM laps WHERE lap NOT IN (SELECT lap FROM stops) AND lap NOT IN (SELECT lap + 1 FROM stops) GROUP BY stint ORDER BY stint;
+----
+1	1	2	100.103	101.328
+
+# TYRE_STRATEGY_BY_FINISH
+query ITTIT
+SELECT r.position, d.name_acronym, d.team_name, count(*) AS stints, string_agg(st.compound, ' > ' ORDER BY st.stint_number) AS strategy FROM f1.main.session_stints(9472) st JOIN f1.main.session_drivers(9472) d USING (driver_number) JOIN f1.main.session_result(9472) r USING (driver_number) GROUP BY r.position, d.name_acronym, d.team_name ORDER BY r.position NULLS LAST, d.name_acronym;
+----
