@@ -4,6 +4,10 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## 0.2.2 (2026-11-16)
+
+- Bump vgi-python to 0.52.2.
+
 ## [0.2.1]
 
 - Docs link to Jolpica-F1, OpenF1 and their CC BY-NC-SA 4.0 licence: the
