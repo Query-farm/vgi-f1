@@ -1,6 +1,6 @@
 [project]
 name = "vgi-f1"
-version = "0.2.2"
+version = "0.2.3"
 description = "A read-only VGI worker exposing Formula 1 results, standings, and timing data to Haybarn SQL"
 readme = "README.md"
 license = "MIT"
